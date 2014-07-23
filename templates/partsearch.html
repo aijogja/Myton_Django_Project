@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block main_area %}
+<h3>Part Number Lookup</h3>
+  <form action="/search/" method="get">{% csrf_token %}
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+<p>
+<div>
+
+    Search Query was <strong>{{ search_query }}</strong></td>
+    <p></p>
+    <p>Results:</p>
+    <div></div>
+
+<table class="table">
+    <tr><strong><th>Part Number</th><th>Description</th><th>Retail Price</th><th>Your Price</th><th>Supersesions</th><th>Surcharge</th></strong></tr>
+    <tr>
+
+
+        <td>{% for part_number in part %}
+             {{ part_number }}
+            {% endfor %}</td>
+
+    </tr>
+
+</table>
+
+</div>
+<p>
+
+</p>
+
+
+
+{% endblock main_area %}

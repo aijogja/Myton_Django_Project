@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block side_bar %}
+<ul>
+    <li><a href="/trade/all">Articles</a></li>
+    <li><a href="/trade/create">Create Articles</a></li>
+</ul>
+{% endblock %}
+
+{% block main_area %}
+    <h3>Latest News</h3>
+    <h5>Language is : {{ language }} </h5>
+    <h5>Session Language is {{ session_language }}</h5>
+{% for article in articles %}
+
+<div>
+    <h3><a href="/trade/{{  article.id }}/">{{ article.title }}</a></h3>
+    <h5><p>{{ article.body }}</p></h5>
+</div>
+{% endfor %}
+
+{% endblock main_area %}
