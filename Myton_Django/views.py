@@ -96,9 +96,7 @@ def search(request):
 
         print str(part_object)
 
-        list1 = part_object('part_number')
 
-        print "list 1" + str(list1)
         #To work out how many rows we need to generate for our HTML table we count "<Part:" that is found
         #in the string and output this into the variable 'table_rows'
 
