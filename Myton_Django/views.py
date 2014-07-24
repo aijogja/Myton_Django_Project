@@ -92,7 +92,8 @@ def search(request):
         print q
 
         #run a query on the database
-        part_object = Part.objects.filter(part_number__icontains=q).values_list('part_number', 'description', 'weight', 'rrp_price', 'buy_price')
+        # part_object = Part.objects.filter(part_number__icontains=q).values_list('part_number', 'description', 'weight', 'rrp_price', 'buy_price')
+        part_object = Part.objects.filter(part_number__icontains=q)
 
         print str(part_object)
 
