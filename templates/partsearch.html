@@ -17,14 +17,18 @@
 
 <table class="table">
     <tr><strong><th>Part Number</th><th>Description</th><th>Retail Price</th><th>Your Price</th><th>Supersesions</th><th>Surcharge</th></strong></tr>
+
+
+    {% for part_number in part %}
     <tr>
-
-
-        <td>{% for part_number in part %}
-             {{ part_number }}
-            {% endfor %}</td>
-
+        <td>{{ part_number.part_number }}</td>
+        <td>{{ part_number.description }}</td>
+        <td>{{ part_number.rrp_price }}</td>
+        <td>{{ part_number.buy_price }}</td>
+        <td>{{ part_number.supersessions }}</td>
+        <td>{{ part_number.surcharge }}</td>
     </tr>
+    {% endfor %}
 
 </table>
 
