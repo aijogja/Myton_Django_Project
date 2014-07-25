@@ -110,3 +110,4 @@ TEMPLATE_DIRS = (
 #Added this code - 11.07.2014
 #Table context processor so that search output is returned as a table
 
+LOGIN_REDIRECT_URL = '/trade'
