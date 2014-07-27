@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template.loader import get_template
-from django.template import Context
+from django.template import Context, RequestContext
 from django.shortcuts import render_to_response
 from trade.models import Article
 from django.http import HttpResponse
@@ -12,9 +12,11 @@ from django.template.loader import render_to_string
 
 def home(request):
     name = "Welcome JSquare"
-    t = get_template('base.html')
-    html = t.render(Context({'name': name}))
-    return HttpResponse(html)
+    # t = get_template('base.html')
+    # html = t.render(Context({'name': name}))
+    # return HttpResponse(html)
+    data = {'name':name}
+    return render_to_response('base.html', data, context_instance=RequestContext(request))
 
 
 def articles(request):
@@ -27,10 +29,12 @@ def articles(request):
     if 'lang' in request.session:
         session_language = request.session['lang']
 
-    return render_to_response('articles.html',
-                              {'articles' : Article.objects.all(),
-                              'language' : language,
-                              'session_language' : session_language})
+    data = {
+        'articles' : Article.objects.all(),
+        'language' : language,
+        'session_language' : session_language
+    }
+    return render_to_response('articles.html', data, context_instance=RequestContext(request))
 
 def language(request, language='en-gb'):
     response = HttpResponse("setting language to %s" % language)
@@ -42,8 +46,8 @@ def language(request, language='en-gb'):
     return response
 
 def article(request, article_id=1):
-    return render_to_response('article.html',
-        {'article': Article.objects.get(id=article_id)})
+    data = {'article': Article.objects.get(id=article_id)}
+    return render_to_response('article.html', data, context_instance=RequestContext(request))
 
 def partsearch(request):
     return render_to_response('partsearch.html')

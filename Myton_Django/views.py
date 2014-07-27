@@ -1,8 +1,10 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+from django.template import Context, RequestContext
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from forms import MyRegistrationForm
 from django.shortcuts import render
 
@@ -11,6 +13,10 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from trade.models import Part
 
+@login_required
+def home(request):
+    data = {}
+    return render_to_response('base.html', data, context_instance=RequestContext(request))
 
 def login(request):
     c = {}

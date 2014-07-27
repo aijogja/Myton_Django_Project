@@ -1,11 +1,12 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.auth import views as auth_views
 
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'Myton_Django.views.home', name='home'),
+    url(r'^$', 'Myton_Django.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
@@ -13,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^trade/$', 'trade.views.home'),
     url(r'^trade/create/$', 'trade.views.create'),
     url(r'^latest-news/$', 'trade.views.articles'),
+    url(r'^article/(\d+)/$', 'trade.views.article'),
    # url(r'^part-search/$', 'trade.views.partsearch'),
     url(r'^search/$', 'Myton_Django.views.search'),
     url(r'^downloads/$', 'trade.views.downloads'),
@@ -23,7 +25,8 @@ urlpatterns = patterns('',
     url(r'^language/(?P<language>[a-z\-]+)/$', 'trade.views.language'),
 
     #user auth urls
-    url(r'^accounts/login/$', 'Myton_Django.views.login'),
+    # url(r'^accounts/login/$', 'Myton_Django.views.login'),    
+    url(r'^accounts/login/$', auth_views.login,{'template_name': 'safe_login.html'}, name='auth_login'),
     url(r'^accounts/auth/$', 'Myton_Django.views.auth_view'),
     url(r'^accounts/logout/$', 'Myton_Django.views.logout'),
     url(r'^accounts/loggedin/$', 'Myton_Django.views.loggedin'),
