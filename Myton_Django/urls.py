@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     url(r'^$', 'Myton_Django.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^staff/$', 'staff.views.home'),
+
     url(r'^admin/', include(admin.site.urls)),
    # url(r'^trade/$', 'trade.views.hello'),
     url(r'^trade/$', 'trade.views.home'),

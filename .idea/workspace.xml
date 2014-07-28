@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="def1f3f3-93b5-4235-86ae-a3587c82878f" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Tom Home\Documents\Myton_Django_Project\.idea\scopes\scope_settings (1).xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tom Home\Documents\Myton_Django_Project\Myton_Django\views-TomHome-PC.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tom Home\Documents\Myton_Django_Project\Myton_Django\views-Toms_Laptop.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tom Home\Documents\Myton_Django_Project\db (1).sqlite3" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tom Home\Documents\Myton_Django_Project\db (2).sqlite3" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Tom Home\Documents\Myton_Django_Project\db (3).sqlite3" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Tom Home\Documents\Myton_Django_Project\db (4).sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/staff-base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/articles.html" afterPath="$PROJECT_DIR$/templates/articles.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/footer.html" afterPath="$PROJECT_DIR$/templates/footer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/partsearch.html" afterPath="$PROJECT_DIR$/templates/partsearch.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Myton_Django/urls.py" afterPath="$PROJECT_DIR$/Myton_Django/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Myton_Django/views.py" afterPath="$PROJECT_DIR$/Myton_Django/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -26,8 +26,8 @@
     <SUITE FILE_PATH="coverage/Myton_Django$populate.coverage" NAME="populate Coverage Results" MODIFIED="1402006407440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/populate" />
     <SUITE FILE_PATH="coverage/Myton_Django$populate_rango.coverage" NAME="populate_rango Coverage Results" MODIFIED="1402084529436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Myton_Django$run_server_in_debug_mode.coverage" NAME="run server in debug mode Coverage Results" MODIFIED="1405876348001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Myton_Django$models.coverage" NAME="models Coverage Results" MODIFIED="1402082744171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/trade" />
     <SUITE FILE_PATH="coverage/Myton_Django$populate__1_.coverage" NAME="run server in debug mode Coverage Results" MODIFIED="1405802554213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Myton_Django$models.coverage" NAME="models Coverage Results" MODIFIED="1402082744171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/trade" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -41,19 +41,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="wsgi.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/site-packages/django/core/handlers/wsgi.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="214" column="0" selection-start="7646" selection-end="7646" vertical-scroll-proportion="0.0" vertical-offset="2649" max-vertical-offset="3519">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Myton_Django/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="98" column="0" selection-start="2647" selection-end="2647" vertical-scroll-proportion="0.7206166" vertical-offset="1292" max-vertical-offset="2890">
+            <state line="108" column="0" selection-start="0" selection-end="3036" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1938">
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -61,56 +52,85 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="handlers.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/site-packages/django/contrib/staticfiles/handlers.py">
+      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="0" selection-start="2298" selection-end="2298" vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="1258">
+            <state line="21" column="55" selection-start="744" selection-end="813" vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="1326">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="handlers.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/wsgiref/handlers.py">
+      <file leaf-file-name="populate (1).py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/populate (1).py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="0" selection-start="2959" selection-end="2959" vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="7752">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="2720">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simple_server.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/wsgiref/simple_server.py">
+      <file leaf-file-name="populate.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/populate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="0" selection-start="3789" selection-end="3789" vertical-scroll-proportion="0.0" vertical-offset="2091" max-vertical-offset="2754">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="2258" max-vertical-offset="2771">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SocketServer.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/SocketServer.py">
+      <file leaf-file-name="staff-base.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/staff-base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="593" column="0" selection-start="19209" selection-end="19209" vertical-scroll-proportion="0.0" vertical-offset="10081" max-vertical-offset="12529">
+            <state line="42" column="55" selection-start="1608" selection-end="1608" vertical-scroll-proportion="0.69815195" vertical-offset="374" max-vertical-offset="1309">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="threading.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/threading.py">
+      <file leaf-file-name="partsearch.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/partsearch.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="762" column="0" selection-start="27028" selection-end="27028" vertical-scroll-proportion="0.0" vertical-offset="12757" max-vertical-offset="22729">
+            <state line="29" column="63" selection-start="908" selection-end="908" vertical-scroll-proportion="-11.115385" vertical-offset="204" max-vertical-offset="816">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="basehttp.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/site-packages/django/core/servers/basehttp.py">
+      <file leaf-file-name="login (1).html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/login (1).html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="0" selection-start="4483" selection-end="4483" vertical-scroll-proportion="0.0" vertical-offset="2125" max-vertical-offset="2975">
+            <state line="12" column="0" selection-start="146" selection-end="146" vertical-scroll-proportion="-5.3461537" vertical-offset="65" max-vertical-offset="578">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="0" selection-start="1020" selection-end="1020" vertical-scroll-proportion="-19.615385" vertical-offset="0" max-vertical-offset="799">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login2.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/login2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="425">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Myton_Django/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="52" selection-start="251" selection-end="255" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -133,22 +153,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/trade/froms.py" />
-        <option value="$PROJECT_DIR$/trade/forms.py" />
-        <option value="$PROJECT_DIR$/trade/urls.py" />
         <option value="$PROJECT_DIR$/templates/create_article.html" />
         <option value="$PROJECT_DIR$/templates/loggedin.html" />
         <option value="$PROJECT_DIR$/Myton_Django/imported view.py" />
         <option value="$PROJECT_DIR$/trade/views.py" />
         <option value="$PROJECT_DIR$/templates/experiments.html" />
-        <option value="$PROJECT_DIR$/Myton_Django/urls.py" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/Myton_Django/settings.py" />
-        <option value="$PROJECT_DIR$/templates/articles.html" />
         <option value="$PROJECT_DIR$/trade/models.py" />
-        <option value="$PROJECT_DIR$/templates/partsearch.html" />
         <option value="$PROJECT_DIR$/templates/about.html" />
+        <option value="$PROJECT_DIR$/templates/footer.html" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/Myton_Django/urls.py" />
+        <option value="$PROJECT_DIR$/staff/views.py" />
         <option value="$PROJECT_DIR$/Myton_Django/views.py" />
+        <option value="$PROJECT_DIR$/templates/articles.html" />
+        <option value="$PROJECT_DIR$/templates/staff-base.html" />
+        <option value="$PROJECT_DIR$/templates/partsearch.html" />
       </list>
     </option>
   </component>
@@ -198,7 +218,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Myton_Django_Project" />
+              <option name="myItemId" value="Myton_Django" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -208,7 +228,49 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Myton_Django_Project" />
+              <option name="myItemId" value="Myton_Django" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trade" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Myton_Django" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Myton_Django" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Myton_Django" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Myton_Django" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="staff" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Myton_Django" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Myton_Django" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -222,18 +284,18 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="full.screen.before.presentation.mode" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="full.screen.before.presentation.mode" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="recentsLimit" value="5" />
-    <property name="restartRequiresConfirmation" value="true" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -416,27 +478,7 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Myton_Django" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
@@ -462,7 +504,27 @@
       <option name="customRunCommand" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Myton_Django" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -575,17 +637,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35935706" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3585338" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.66323024" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35189718" sideWeight="0.64064294" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35679314" sideWeight="0.6414662" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2996707" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35935706" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3585338" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2487725" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -612,9 +674,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.66323024" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3261934" sideWeight="0.61997706" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2487725" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -639,115 +701,119 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/Python27/Lib/site-packages/django/core/handlers/wsgi.py">
+    <entry file="file://$PROJECT_DIR$/templates/about.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="214" column="0" selection-start="7646" selection-end="7646" vertical-scroll-proportion="0.0" vertical-offset="2987" max-vertical-offset="3519">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="513">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/contrib/staticfiles/handlers.py">
+    <entry file="file://$PROJECT_DIR$/templates/article.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="0" selection-start="2298" selection-end="2298" vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="1258">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="513">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/wsgiref/handlers.py">
+    <entry file="file://$PROJECT_DIR$/Myton_Django/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="0" selection-start="2959" selection-end="2959" vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="7752">
+        <state line="19" column="65" selection-start="657" selection-end="657" vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="2023">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/wsgiref/simple_server.py">
+    <entry file="file://$PROJECT_DIR$/trade/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="0" selection-start="3789" selection-end="3789" vertical-scroll-proportion="0.0" vertical-offset="2091" max-vertical-offset="2754">
+        <state line="22" column="0" selection-start="761" selection-end="814" vertical-scroll-proportion="0.0" vertical-offset="50" max-vertical-offset="1411">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/SocketServer.py">
+    <entry file="file://$PROJECT_DIR$/templates/articles.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="593" column="0" selection-start="19209" selection-end="19209" vertical-scroll-proportion="0.0" vertical-offset="10081" max-vertical-offset="12529">
+        <state line="3" column="0" selection-start="48" selection-end="48" vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="408">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/threading.py">
+    <entry file="file://$PROJECT_DIR$/templates/footer.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="762" column="0" selection-start="27028" selection-end="27028" vertical-scroll-proportion="0.0" vertical-offset="12757" max-vertical-offset="22729">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="513">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/core/servers/basehttp.py">
+    <entry file="file://$PROJECT_DIR$/templates/login (1).html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="0" selection-start="4483" selection-end="4483" vertical-scroll-proportion="0.0" vertical-offset="2125" max-vertical-offset="2975">
+        <state line="12" column="0" selection-start="146" selection-end="146" vertical-scroll-proportion="-5.3461537" vertical-offset="65" max-vertical-offset="578">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/core/handlers/base.py">
+    <entry file="file://$PROJECT_DIR$/templates/login2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="204" column="0" selection-start="9083" selection-end="9083" vertical-scroll-proportion="0.0" vertical-offset="3027" max-vertical-offset="4743" />
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/contrib/staticfiles/handlers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="0" selection-start="2298" selection-end="2298" vertical-scroll-proportion="0.0" vertical-offset="567" max-vertical-offset="1139">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="513">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/wsgiref/handlers.py">
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="0" selection-start="2959" selection-end="2959" vertical-scroll-proportion="0.0" vertical-offset="1187" max-vertical-offset="7684">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/wsgiref/simple_server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="0" selection-start="3789" selection-end="3789" vertical-scroll-proportion="0.0" vertical-offset="1867" max-vertical-offset="2720">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/core/servers/basehttp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="0" selection-start="4483" selection-end="4483" vertical-scroll-proportion="0.0" vertical-offset="1697" max-vertical-offset="2737">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/SocketServer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="593" column="0" selection-start="19209" selection-end="19209" vertical-scroll-proportion="0.0" vertical-offset="9816" max-vertical-offset="12461">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/threading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="762" column="0" selection-start="27028" selection-end="27028" vertical-scroll-proportion="0.0" vertical-offset="12757" max-vertical-offset="22729">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/django/core/handlers/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="214" column="0" selection-start="7646" selection-end="7646" vertical-scroll-proportion="0.0" vertical-offset="2649" max-vertical-offset="3519">
+        <state line="30" column="0" selection-start="1020" selection-end="1020" vertical-scroll-proportion="-19.615385" vertical-offset="0" max-vertical-offset="799">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Myton_Django/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="0" selection-start="2647" selection-end="2647" vertical-scroll-proportion="0.7206166" vertical-offset="1292" max-vertical-offset="2890">
+        <state line="108" column="0" selection-start="0" selection-end="3036" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1938">
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Myton_Django/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="52" selection-start="251" selection-end="255" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="55" selection-start="744" selection-end="813" vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="1326">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/populate (1).py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/populate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="2258" max-vertical-offset="2771">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/partsearch.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="63" selection-start="908" selection-end="908" vertical-scroll-proportion="-11.115385" vertical-offset="204" max-vertical-offset="816">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/staff-base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="55" selection-start="1608" selection-end="1608" vertical-scroll-proportion="0.69815195" vertical-offset="374" max-vertical-offset="1309">
+          <folding />
         </state>
       </provider>
     </entry>
