@@ -44,12 +44,22 @@
               <li {% if breadcrumb == 'search' %}class="active"{% endif %}><a href="/search/">Part Seach & Stock Check</a></li>
               <li {% if breadcrumb == 'downloads' %}class="active"{% endif %}><a href="/downloads">Downloads</a></li>
               <li {% if breadcrumb == 'my-details' %}class="active"{% endif %}><a href="/my-details">My Details</a></li>
+              <li><a href="/accounts/logout">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
 
 <div>
+{% if messages %}
+    {% for message in messages %}
+    <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+
     {% block main_area %}
 
     {% endblock main_area %}

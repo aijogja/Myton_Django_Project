@@ -2,10 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-
-
-
-
 class Article(models.Model):
     title = models.CharField(max_length=30)
     body = models.TextField()
@@ -32,38 +28,38 @@ class Part(models.Model):
     chassis_range = models.CharField(max_length=30)
     derivitive = models.CharField(max_length=30)
 
-    weight = models.FloatField()
+    weight = models.FloatField(null=True)
 
     #Prices
-    rrp_price = models.FloatField()
-    buy_price = models.FloatField()
-    surcharge = models.FloatField()
+    rrp_price = models.FloatField(null=True)
+    buy_price = models.FloatField(null=True)
+    surcharge = models.FloatField(null=True)
 
     #Supplier Information
-    supplier_1 = models.TextField()
-    supplier_1_part_number = models.TextField()
-    supplier_1_leadtime = models.TextField()
-    supplier_1_buy_price = models.TextField()
+    supplier_1 = models.TextField(null=True)
+    supplier_1_part_number = models.TextField(null=True)
+    supplier_1_leadtime = models.TextField(null=True)
+    supplier_1_buy_price = models.TextField(null=True)
 
-    supplier_2 = models.TextField()
-    supplier_2_part_number = models.TextField()
-    supplier_2_leadtime = models.TextField()
-    supplier_2_buy_price = models.TextField()
+    supplier_2 = models.TextField(null=True)
+    supplier_2_part_number = models.TextField(null=True)
+    supplier_2_leadtime = models.TextField(null=True)
+    supplier_2_buy_price = models.TextField(null=True)
 
-    supplier_3 = models.TextField()
-    supplier_3_part_number = models.TextField()
-    supplier_3_leadtime = models.TextField()
-    supplier_3_buy_price = models.TextField()
+    supplier_3 = models.TextField(null=True)
+    supplier_3_part_number = models.TextField(null=True)
+    supplier_3_leadtime = models.TextField(null=True)
+    supplier_3_buy_price = models.TextField(null=True)
 
-    supplier_4 = models.TextField()
-    supplier_4_part_number = models.TextField()
-    supplier_4_leadtime = models.TextField()
-    supplier_4_buy_price = models.TextField()
+    supplier_4 = models.TextField(null=True)
+    supplier_4_part_number = models.TextField(null=True)
+    supplier_4_leadtime = models.TextField(null=True)
+    supplier_4_buy_price = models.TextField(null=True)
 
-    supplier_5 = models.TextField()
-    supplier_5_part_number = models.TextField()
-    supplier_5_leadtime = models.TextField()
-    supplier_5_buy_price = models.TextField()
+    supplier_5 = models.TextField(null=True)
+    supplier_5_part_number = models.TextField(null=True)
+    supplier_5_leadtime = models.TextField(null=True)
+    supplier_5_buy_price = models.TextField(null=True)
 
 
     def __unicode__(self):

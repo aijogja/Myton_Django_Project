@@ -49,21 +49,21 @@ def home(request):
 #     auth.logout(request)
 #     return render_to_response('logout.html')
 
-def register_user(request):
-    if request.method == 'POST':
-        form = MyRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/accounts/register_success')
-    args ={}
-    args.update(csrf(request))
+# def register_user(request):
+#     if request.method == 'POST':
+#         form = MyRegistrationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect('/accounts/register_success')
+#     args ={}
+#     args.update(csrf(request))
 
-    args['form'] = MyRegistrationForm()
+#     args['form'] = MyRegistrationForm()
 
-    return render_to_response('register.html', args)
+#     return render_to_response('register.html', args, context_instance=RequestContext(request))
 
-def register_success(request):
-    return render_to_response('register_success.html')
+# def register_success(request):
+#     return render_to_response('register_success.html')
 
 
 #some experiments

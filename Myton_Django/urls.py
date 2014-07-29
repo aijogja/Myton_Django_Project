@@ -28,13 +28,14 @@ urlpatterns = patterns('',
 
     #user auth urls
     url(r'^accounts/login/$', auth_views.login,{'template_name': 'safe_login.html'}, name='auth_login'),
+    url(r'^accounts/logout/$', auth_views.logout,{'next_page': '?next=/'}, name='auth_logout'),
     # url(r'^accounts/login/$', 'Myton_Django.views.login'),        
     # url(r'^accounts/auth/$', 'Myton_Django.views.auth_view'),
     # url(r'^accounts/logout/$', 'Myton_Django.views.logout'),
     # url(r'^accounts/loggedin/$', 'Myton_Django.views.loggedin'),
     # url(r'^accounts/invalid/$', 'Myton_Django.views.invalid_login'),
-    url(r'^accounts/register/$', 'Myton_Django.views.register_user'),
-    url(r'^accounts/register_success/$', 'Myton_Django.views.register_success'),
+    url(r'^accounts/register/$', 'apps.customer.views.register_user'),
+    url(r'^accounts/register_success/$', 'apps.customer.views.register_success'),
 
 
    # url(r'^latest-news/$', include('trade.urls')),
