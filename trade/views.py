@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from django.template import Context, RequestContext
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
 from trade.models import Article
 from django.http import HttpResponse
 from forms import ArticleForm
@@ -10,15 +11,12 @@ from django.core.context_processors import csrf
 from django.template.loader import render_to_string
 # Create your views here.
 
-def home(request):
-    name = "Welcome JSquare"
-    # t = get_template('base.html')
-    # html = t.render(Context({'name': name}))
-    # return HttpResponse(html)
-    data = {'name':name}
-    return render_to_response('base.html', data, context_instance=RequestContext(request))
+# def home(request):
+#     name = "Welcome JSquare"
+#     data = {'name':name, 'breadcrumb':'home'}
+#     return render_to_response('base.html', data, context_instance=RequestContext(request))
 
-
+@login_required
 def articles(request):
     language = 'en-gb'
     session_language = 'en-gb'
@@ -32,7 +30,8 @@ def articles(request):
     data = {
         'articles' : Article.objects.all(),
         'language' : language,
-        'session_language' : session_language
+        'session_language' : session_language,
+        'breadcrumb':'latest-news'
     }
     return render_to_response('articles.html', data, context_instance=RequestContext(request))
 
@@ -45,6 +44,7 @@ def language(request, language='en-gb'):
 
     return response
 
+@login_required
 def article(request, article_id=1):
     data = {'article': Article.objects.get(id=article_id)}
     return render_to_response('article.html', data, context_instance=RequestContext(request))
@@ -52,17 +52,24 @@ def article(request, article_id=1):
 def partsearch(request):
     return render_to_response('partsearch.html')
 
+@login_required
 def details(request):
-    return render_to_response('my-detail.html')
+    data = {'breadcrumb':'my-details'}
+    return render_to_response('my-detail.html', data, context_instance=RequestContext(request))
 
+@login_required
 def downloads(request):
-    return render_to_response('downloads.html')
+    data = {'breadcrumb':'downloads'}
+    return render_to_response('downloads.html', data, context_instance=RequestContext(request))
 
+@login_required
 def orders(request):
-    return render_to_response('my-orders.html')
+    data = {'breadcrumb':'my-orders'}
+    return render_to_response('my-orders.html', data, context_instance=RequestContext(request))
 
 def about(request):
-    return render_to_response('about.html')
+    data = {}
+    return render_to_response('about.html', data, context_instance=RequestContext(request))
 
 def login(request):
     return render_to_response('login.html')

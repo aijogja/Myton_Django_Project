@@ -15,39 +15,39 @@ from trade.models import Part
 
 @login_required
 def home(request):
-    data = {}
+    data = {'breadcrumb':'home'}
     return render_to_response('base.html', data, context_instance=RequestContext(request))
 
-def login(request):
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('safe_login.html', c)
+# def login(request):
+#     c = {}
+#     c.update(csrf(request))
+#     return render_to_response('safe_login.html', c)
 
 
-def auth_view(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-    user = auth.authenticate(username=username, password=password)
+# def auth_view(request):
+#     username = request.POST.get('username', '')
+#     password = request.POST.get('password', '')
+#     user = auth.authenticate(username=username, password=password)
 
-    if user is not None:
-        auth.login(request, user)
-        return HttpResponseRedirect('/accounts/loggedin')
-    else:
-        return HttpResponseRedirect('/accounts/invalid')
-
-
-def loggedin(request):
-    return render_to_response('loggedin.html',
-                              {'full_name': request.user.username})
+#     if user is not None:
+#         auth.login(request, user)
+#         return HttpResponseRedirect('/accounts/loggedin')
+#     else:
+#         return HttpResponseRedirect('/accounts/invalid')
 
 
-def invalid_login(request):
-    return render_to_response('invalid_login.html')
+# def loggedin(request):
+#     return render_to_response('loggedin.html',
+#                               {'full_name': request.user.username})
 
 
-def logout(request):
-    auth.logout(request)
-    return render_to_response('logout.html')
+# def invalid_login(request):
+    # return render_to_response('invalid_login.html')
+
+
+# def logout(request):
+#     auth.logout(request)
+#     return render_to_response('logout.html')
 
 def register_user(request):
     if request.method == 'POST':
@@ -87,22 +87,21 @@ def ua_display_good1(request):
 
 
 def search(request):
-    if 'q' in request.GET and request.GET['q']:
+    data = {'breadcrumb': 'search'}
 
+    if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
 
         #perform some operations on the search entered - ie. remove spaces - change all letters to upper case
         q.upper()
-        print q
+        # print q
         q = q.replace(" ", "")
-        print q
+        # print q
 
         #run a query on the database
         part_object = Part.objects.filter(part_number__icontains=q)
-
-        return render(request, 'partsearch.html', {'part': part_object, 'search_query': q })
-
-    #this else is to be used when invalid data is entered.
-    else:
-        return render(request, 'partsearch.html', {'search_query': 'nothing found'})
+        data['search_query'] = q
+        data['part'] = part_object  
+    
+    return render_to_response('partsearch.html', data, context_instance=RequestContext(request))
 

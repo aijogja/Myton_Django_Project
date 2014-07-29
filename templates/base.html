@@ -38,12 +38,12 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/trade">Home</a></li>
-              <li><a href="/latest-news">Latest News</a></li>
-              <li><a href="/my-orders">My Orders</a></li>
-              <li><a href="/search/?q=">Part Seach & Stock Check</a></li>
-              <li><a href="/downloads">Downloads</a></li>
-              <li><a href="/my-details">My Details</a></li>
+              <li {% if breadcrumb == 'home' %}class="active"{% endif %}><a href="/">Home</a></li>
+              <li {% if breadcrumb == 'latest-news' %}class="active"{% endif %}><a href="/latest-news">Latest News</a></li>
+              <li {% if breadcrumb == 'my-orders' %}class="active"{% endif %}><a href="/my-orders">My Orders</a></li>
+              <li {% if breadcrumb == 'search' %}class="active"{% endif %}><a href="/search/">Part Seach & Stock Check</a></li>
+              <li {% if breadcrumb == 'downloads' %}class="active"{% endif %}><a href="/downloads">Downloads</a></li>
+              <li {% if breadcrumb == 'my-details' %}class="active"{% endif %}><a href="/my-details">My Details</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

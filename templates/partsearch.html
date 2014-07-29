@@ -3,22 +3,21 @@
 
 {% block main_area %}
 <h3>Part Number Lookup</h3>
-  <form action="/search/" method="get">{% csrf_token %}
-        <input type="text" name="q">
-        <input type="submit" value="Search">
-    </form>
-<p>
-<div>
+<form action="/search/" method="get">
+    {% csrf_token %}
+    <input type="text" name="q">
+    <input type="submit" value="Search">
+</form> 
 
-    Search Query was <strong>{{ search_query }}</strong></td>
-    <p></p>
+
+<div>
+    <p>{% if search_query %}Search Query was <strong>{{ search_query }}</strong>{% endif %}</p>
     <p>Results:</p>
-    <div></div>
 
 <table class="table">
-    <tr><strong><th>Part Number</th><th>Description</th><th>Retail Price</th><th>Your Price</th><th>Supersesions</th><th>Surcharge</th></strong></tr>
+    <tr><th>Part Number</th><th>Description</th><th>Retail Price</th><th>Your Price</th><th>Supersesions</th><th>Surcharge</th><th></th></tr>
 
-
+    {% if part %}
     {% for part_number in part %}
     <tr>
         <td>{{ part_number.part_number }}</td>
@@ -30,14 +29,12 @@
         <td><button type="button" class="btn btn-success btn-sm">Order</button></td>
     </tr>
     {% endfor %}
+    {% else %}
+    <tr><td colspan="7" class="text-center">No Result</td></tr>
+    {% endif %}
 
 </table>
 
 </div>
-<p>
-
-</p>
-
-
 
 {% endblock main_area %}
