@@ -8,14 +8,15 @@ from django.contrib.auth.decorators import login_required
 from forms import MyRegistrationForm
 from django.shortcuts import render
 
-#experiment - 03.07.2014 - tomc
+# experiment - 03.07.2014 - tomc
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from trade.models import Part
 
+
 @login_required
 def home(request):
-    data = {'breadcrumb':'home'}
+    data = {'breadcrumb': 'home'}
     return render_to_response('base.html', data, context_instance=RequestContext(request))
 
 # def login(request):
@@ -60,22 +61,22 @@ def home(request):
 
 #     args['form'] = MyRegistrationForm()
 
-#     return render_to_response('register.html', args, context_instance=RequestContext(request))
+# return render_to_response('register.html', args,
+# context_instance=RequestContext(request))
 
 # def register_success(request):
 #     return render_to_response('register_success.html')
 
 
-#some experiments
+# some experiments
 
 def ua_display_good1(request):
 
     var = 001
 
-
     return HttpResponse(render_to_string('experiments.html', {'id_number': var}))
 
-#def search(request):
+# def search(request):
 #    if 'q' in request.GET:
 #        message = request.GET['q']
 #    else:
@@ -83,7 +84,8 @@ def ua_display_good1(request):
 #
 #
 #    data_received = message
-#    return HttpResponse(render_to_string('partsearch.html', {'id_number': data_received}))
+# return HttpResponse(render_to_string('partsearch.html', {'id_number':
+# data_received}))
 
 
 def search(request):
@@ -92,16 +94,16 @@ def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
 
-        #perform some operations on the search entered - ie. remove spaces - change all letters to upper case
+        # perform some operations on the search entered - ie. remove spaces -
+        # change all letters to upper case
         q.upper()
         # print q
         q = q.replace(" ", "")
         # print q
 
-        #run a query on the database
+        # run a query on the database
         part_object = Part.objects.filter(part_number__icontains=q)
         data['search_query'] = q
-        data['part'] = part_object  
-    
-    return render_to_response('partsearch.html', data, context_instance=RequestContext(request))
+        data['part'] = part_object
 
+    return render_to_response('partsearch.html', data, context_instance=RequestContext(request))

@@ -19,10 +19,10 @@ authentication_url = 'http://www.hotsupport.co.uk/'
 
 # Input parameters we are going to send
 payload = {
-  'op': 'Form1',
-  'user': '<tx_UserName>',
-  'passwd': '<tx_Password>'
-  }
+    'op': 'Form1',
+    'user': '<tx_UserName>',
+    'passwd': '<tx_Password>'
+}
 
 # Use urllib to encode the payload
 data = urllib.urlencode(payload)

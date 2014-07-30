@@ -4,11 +4,16 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import ValidationError
 from apps.customer.models import Profile
 
+
 class MyRegistrationForm(UserCreationForm):
-    username = forms.CharField(label='Username', required=True, widget = forms.TextInput(attrs={'class':'form-control'}))
-    email = forms.EmailField(label='Email', required=True, widget = forms.TextInput(attrs={'class':'form-control'}))
-    password1 = forms.CharField(label='Password', required=True, widget = forms.PasswordInput(render_value=False, attrs={'class':'form-control'}))
-    password2 = forms.CharField(label='Confirm Password', required=True, widget = forms.PasswordInput(render_value=False, attrs={'class':'form-control'}))
+    username = forms.CharField(label='Username', required=True,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label='Email', required=True,
+                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label='Password', required=True, widget=forms.PasswordInput(
+        render_value=False, attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Confirm Password', required=True, widget=forms.PasswordInput(
+        render_value=False, attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
@@ -34,7 +39,8 @@ class MyRegistrationForm(UserCreationForm):
         password = self.cleaned_data['password']
         repassword = self.cleaned_data['repassword']
         if password != repassword:
-            raise ValidationError("The Password didn't match. Please try again")
+            raise ValidationError(
+                "The Password didn't match. Please try again")
         return repassword
 
     def save(self, commit=True):
@@ -46,10 +52,12 @@ class MyRegistrationForm(UserCreationForm):
 
         return user
 
+
 class UpdateProfile(forms.ModelForm):
+
     class Meta:
         model = Profile
-        exclude = ['user','discount']
+        exclude = ['user', 'discount']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -63,5 +71,3 @@ class UpdateProfile(forms.ModelForm):
             'telephone': forms.TextInput(attrs={'class': 'form-control'}),
             'mobile': forms.TextInput(attrs={'class': 'form-control'}),
         }
-
-

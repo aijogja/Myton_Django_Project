@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block main_area %}
+<h3>Downloads Page</h3>
+
+
+<table class="table">
+    <tr>
+    	<th class="col-md-10">Title</th>
+    	<th>Created On</th>
+    </tr>
+
+    {% if data_table %}
+    {% for download in data_table %}
+    <tr>
+        <td><a href="{{ STATIC_URL }}media/{{ download.file_upload }}">{{ download.title }}</a></td>
+        <td>{{ download.created_on|date:"F d, Y" }}</td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr><td colspan="2" class="text-center">No Result</td></tr>
+    {% endif %}
+
+</table>
+
+{% endblock %}

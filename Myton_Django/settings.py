@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+location = lambda x: os.path.join(
+    os.path.dirname(os.path.realpath(__file__)), '..', x)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -37,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'trade',
-    'apps.customer'
+    'apps.customer',
+    'apps.files'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,32 +97,36 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/static/media/'
 
-#Tom's code that works (from another project) to find the correct static files - bit of a hack though!
-#*************************************************************************************************************
+MEDIA_ROOT = location('static/media')
+
+
+# Tom's code that works (from another project) to find the correct static files - bit of a hack though!
+#*************************************************************************
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 
-STATIC_PATH = os.path.join(PROJECT_PATH,'static')
+STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
 
 STATICFILES_DIRS = (
     STATIC_PATH,
 )
 
-#****************************************************************************************************************
-#Tom's code for template directory
+#*************************************************************************
+# Tom's code for template directory
 
-TEMPLATE_PATH = os.path.join(PROJECT_PATH,'templates')
+TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 
 TEMPLATE_DIRS = (
     TEMPLATE_PATH,
 )
 
 
-#****************************************************************************************************************
-#Added this code - 11.07.2014
-#Table context processor so that search output is returned as a table
+#*************************************************************************
+# Added this code - 11.07.2014
+# Table context processor so that search output is returned as a table
 
 LOGIN_REDIRECT_URL = '/'
