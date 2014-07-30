@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 location = lambda x: os.path.join(
     os.path.dirname(os.path.realpath(__file__)), '..', x)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -26,7 +27,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -60,12 +61,14 @@ WSGI_APPLICATION = 'Myton_Django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+# ======================= For sqlite ===========================
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+# ==============================================================
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -76,6 +79,7 @@ DATABASES = {
         'PORT': '',
     }
 }
+DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization
@@ -94,6 +98,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
+
+STATIC_ROOT = 'staticfiles'
 
 STATIC_URL = '/static/'
 
@@ -130,3 +136,5 @@ TEMPLATE_DIRS = (
 # Table context processor so that search output is returned as a table
 
 LOGIN_REDIRECT_URL = '/'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
