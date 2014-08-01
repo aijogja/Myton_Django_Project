@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block main_area %}
+<h3>My Cart</h3>
+
+<div>
+
+<table class="table">
+    <tr>
+        <th>Part Number</th>
+        <th>Description</th>        
+        <th class="text-center">Quantity</th>
+        <th>Price</th>
+    </tr>
+    
+    {% if cart.count > 0 %}
+        {% for item in cart %}
+        <tr>
+            <td>{{ item.product.part_number }}</td>
+            <td>{{ item.product.description }}</td>
+            <td class="text-center">{{ item.quantity }}</td>
+            <td>{{ item.total_price }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2"></td>
+            <td>Total Price</td>
+            <td>{{ cart.summary }}</td>
+        </tr>
+    {% else %}
+        <tr><td colspan="4" class="text-center">Cart Empty</td></tr>
+    {% endif %}
+
+</table>
+
+</div>
+
+{% endblock main_area %}

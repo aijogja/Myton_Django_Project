@@ -41,7 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'trade',
     'apps.customer',
-    'apps.files'
+    'apps.files',
+    'cart'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -79,7 +80,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-DATABASES['default'] =  dj_database_url.config()
+# DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization

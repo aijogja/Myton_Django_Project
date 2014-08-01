@@ -12,12 +12,29 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from trade.models import Part
-
+from cart import Cart
 
 @login_required
 def home(request):
     data = {'breadcrumb': 'home'}
     return render_to_response('base.html', data, context_instance=RequestContext(request))
+
+def add_to_cart(request, product_id):
+    if request.is_ajax():
+        part = Part.objects.get(id=product_id)
+        cart = Cart(request)
+        cart.add(part, part.buy_price, 1)
+        return HttpResponse('part added to cart.')
+    else:
+        return HttpResponseRedirect('/')
+
+def mycart(request):
+    cart=Cart(request)
+    data = {
+        'breadcrumb': 'my-cart',
+        'cart':cart
+    }
+    return render_to_response('cart.html', data, context_instance=RequestContext(request))
 
 # def login(request):
 #     c = {}

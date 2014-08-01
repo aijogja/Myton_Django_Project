@@ -44,6 +44,7 @@
               <li {% if breadcrumb == 'search' %}class="active"{% endif %}><a href="/search/">Part Seach & Stock Check</a></li>
               <li {% if breadcrumb == 'downloads' %}class="active"{% endif %}><a href="/downloads">Downloads</a></li>
               <li {% if breadcrumb == 'my-details' %}class="active"{% endif %}><a href="/my-details">My Details</a></li>
+              <li {% if breadcrumb == 'my-cart' %}class="active"{% endif %}><a href="/my-cart">My Cart</a></li>
               <li><a href="/accounts/logout">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -65,10 +66,6 @@
     {% endblock main_area %}
 </div>
 
-
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-
 <div class="well well-sm">{% include "footer.html"%}</div>
 
 <div>
@@ -77,6 +74,19 @@
     {% endblock side_bar %}
 </div>
 
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script type="text/javascript">
+function addtocart(url){
+  $.ajax ({
+    url: url ,
+    type: "GET",
+    success: function(msg){
+      alert(msg);      
+    },
+  });
+}
+</script>
 </body>
 </div>
 </html>
