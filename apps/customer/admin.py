@@ -1,4 +1,13 @@
 from django.contrib import admin
 from apps.customer.models import Profile
 # Register your models here.
-admin.site.register(Profile)
+
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['business_name', 'first_name', 'last_name','customer_email','telephone','mobile','discount']
+
+    def customer_email(self, obj):
+        return obj.user.email
+    customer_email.short_description = 'Email'
+    customer_email.admin_order_field = 'user__email'
+
+admin.site.register(Profile,ProfileAdmin)

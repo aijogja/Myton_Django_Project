@@ -7,6 +7,8 @@ from django_countries.fields import CountryField
 
 
 class Profile(models.Model):
+    BAND = (('A', 'A'),('B', 'B'),('C', 'C'),('D', 'D'),('E', 'E'),('F', 'F'))
+
     user = models.OneToOneField(User)
     first_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255, null=True)
@@ -19,7 +21,8 @@ class Profile(models.Model):
     country = CountryField(max_length=100, blank=True, null=True)
     telephone = models.CharField(max_length=50, null=True)
     mobile = models.CharField(max_length=50, blank=True, null=True)
-    discount = models.CharField(max_length=10, blank=True, null=True)
+    discount = models.CharField(max_length=10, choices=BAND, default='A', null=True)
+    vat = models.BooleanField(default=False)
     mailing_list = models.BooleanField(default=True)
     special_offers = models.BooleanField(default=True)
     created_on = models.DateTimeField(auto_now_add=True)

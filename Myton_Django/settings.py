@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'trade',
     'apps.customer',
     'apps.files',
+    'apps.product',
     'cart'
 )
 
