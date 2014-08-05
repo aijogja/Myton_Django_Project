@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 import os
 import dj_database_url
 location = lambda x: os.path.join(
@@ -81,7 +82,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-# DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization
@@ -132,6 +133,16 @@ TEMPLATE_DIRS = (
     TEMPLATE_PATH,
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.request",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+)
 
 #*************************************************************************
 # Added this code - 11.07.2014

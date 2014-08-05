@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block main_area %}
+<h3>Part Number Lookup</h3>
+<form action="/search/" method="get">
+    {% csrf_token %}
+    <input type="text" name="q">
+    <input type="submit" value="Search">
+</form> 
+
+
+<div>
+    <p>{% if search_query %}Search Query was <strong>{{ search_query }}</strong>{% endif %}</p>
+    <p>Results:</p>
+
+<table class="table">
+    <tr><th>Part Number</th><th>Description</th><th>Retail Price</th><th>Your Price</th><th>Supersesions</th><th>Surcharge</th><th></th></tr>
+
+    {% if part %}
+    {% for part_number in part %}
+    <tr>
+        <td>{{ part_number.part_number }}</td>
+        <td>{{ part_number.name }}</td>
+        <td>{{ part_number.retail_price }}</td>
+        <td>{% your_price request part_number.pk %}</td>
+        <td>{{ part_number.surcharge }}</td>
+        <td><a href="" onclick="addtocart('/addcart/{{part_number.id}}'); return false;" class="btn btn-success btn-sm">Order</a></td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr><td colspan="7" class="text-center">No Result</td></tr>
+    {% endif %}
+
+</table>
+
+</div>
+
+{% endblock main_area %}

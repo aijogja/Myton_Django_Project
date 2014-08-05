@@ -3,7 +3,7 @@ from apps.customer.models import Profile
 # Register your models here.
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['business_name', 'first_name', 'last_name','customer_email','telephone','mobile','discount']
+    list_display = ['user', 'business_name', 'first_name', 'last_name','customer_email','telephone','mobile','discount']
 
     def customer_email(self, obj):
         return obj.user.email

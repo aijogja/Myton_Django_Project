@@ -11,7 +11,9 @@ from django.shortcuts import render
 # experiment - 03.07.2014 - tomc
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from trade.models import Part
+# from trade.models import Part
+from apps.product.models import Part
+from apps.customer.models import Profile
 from cart import Cart
 
 @login_required
@@ -21,9 +23,10 @@ def home(request):
 
 def add_to_cart(request, product_id):
     if request.is_ajax():
+        your_price = calculate_your_price(request, product_id)
         part = Part.objects.get(id=product_id)
         cart = Cart(request)
-        cart.add(part, part.buy_price, 1)
+        cart.add(part, your_price, 1)
         return HttpResponse('part added to cart.')
     else:
         return HttpResponseRedirect('/')
@@ -123,4 +126,61 @@ def search(request):
         data['search_query'] = q
         data['part'] = part_object
 
-    return render_to_response('partsearch.html', data, context_instance=RequestContext(request))
+    return render_to_response('product/list_product.html', data, context_instance=RequestContext(request))
+
+
+# Calculating discount band
+
+def calculate_your_price(request, product_id):
+    part = Part.objects.get(pk=product_id)
+    customer = Profile.objects.get(user=request.user)
+
+    buy_price_1 = part.retail_price / 100
+    buy_price_2 = part.discount_code.discount*buy_price_1
+    buy_price = part.retail_price - buy_price_2
+    split_amount = buy_price_2 / 7
+    split_amount_2 = split_amount
+
+    if customer.discount == 'F':
+        discount = buy_price + discount_band_F(split_amount, split_amount_2)
+    elif customer.discount == 'E':
+        discount = buy_price + discount_band_E(split_amount, split_amount_2)
+    elif customer.discount == 'D':
+        discount = buy_price + discount_band_D(split_amount, split_amount_2)
+    elif customer.discount == 'C':
+        discount = buy_price + discount_band_C(split_amount, split_amount_2)
+    elif customer.discount == 'B':
+        discount = buy_price + discount_band_B(split_amount, split_amount_2)
+    elif customer.discount == 'A':
+        discount = part.retail_price
+
+    return "%.2f" % discount
+
+
+def discount_band_F(split_amount, split_amount_2):
+    split_amount_2 = split_amount_2 + split_amount
+    return split_amount_2
+
+
+def discount_band_E(split_amount, split_amount_2):
+    split_amount_2 = discount_band_F (split_amount, split_amount_2)
+    split_amount_2 = split_amount_2 + split_amount
+    return split_amount_2
+
+
+def discount_band_D(split_amount, split_amount_2):
+    split_amount_2 = discount_band_E (split_amount, split_amount_2)
+    split_amount_2 = split_amount_2 + split_amount
+    return split_amount_2
+
+
+def discount_band_C(split_amount, split_amount_2):
+    split_amount_2 = discount_band_D (split_amount, split_amount_2)
+    split_amount_2 = split_amount_2 + split_amount
+    return split_amount_2
+
+
+def discount_band_B(split_amount, split_amount_2):
+    split_amount_2 = discount_band_C (split_amount, split_amount_2)
+    split_amount_2 = split_amount_2 + split_amount
+    return split_amount_2

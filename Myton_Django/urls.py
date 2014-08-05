@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth import views as auth_views
+from django.template.loader import add_to_builtins
+add_to_builtins('apps.templatetags.myton_tags')
 
 from django.contrib import admin
 admin.autodiscover()
