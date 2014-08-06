@@ -12,8 +12,10 @@ urlpatterns = patterns('',
                        # url(r'^blog/', include('blog.urls')),
 
                        # url(r'^staff/$', 'staff.views.home'),
-
+                       url(r'^grappelli/', include('grappelli.urls')),
                        url(r'^admin/', include(admin.site.urls)),
+                       url(r'^chaining/', include('smart_selects.urls')),
+
                        # url(r'^trade/$', 'trade.views.hello'),
                        # url(r'^trade/$', 'trade.views.home'),
                        url(r'^trade/create/$', 'trade.views.create'),

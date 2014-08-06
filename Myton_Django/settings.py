@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +45,9 @@ INSTALLED_APPS = (
     'apps.customer',
     'apps.files',
     'apps.product',
-    'cart'
+    'cart',
+    'south',
+    'smart_selects',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -133,6 +136,12 @@ TEMPLATE_DIRS = (
     TEMPLATE_PATH,
 )
 
+#*************************************************************************
+# Added this code - 11.07.2014
+# Table context processor so that search output is returned as a table
+
+LOGIN_REDIRECT_URL = '/'
+
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.request",
@@ -144,10 +153,11 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     "django.contrib.messages.context_processors.messages",
 )
 
-#*************************************************************************
-# Added this code - 11.07.2014
-# Table context processor so that search output is returned as a table
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+)
 
-LOGIN_REDIRECT_URL = '/'
+GRAPPELLI_ADMIN_TITLE = 'Myton Automotive'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

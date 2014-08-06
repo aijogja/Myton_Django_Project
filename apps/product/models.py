@@ -1,4 +1,5 @@
 from django.db import models
+from smart_selects.db_fields import ChainedForeignKey, GroupedForeignKey
 
 # Create your models here.
 
@@ -62,16 +63,17 @@ class Part(models.Model):
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='part', null=True)
     car = models.ForeignKey(Car,related_name='car_part', null=True)
-    model = models.ForeignKey(Model,related_name='model', null=True)
+    # model = models.ForeignKey(Model,related_name='model', null=True)
+    model = ChainedForeignKey(Model, chained_field="car", chained_model_field="car", null=True)
     category = models.ForeignKey(Category,related_name='category', null=True)
     chassis_range = models.CharField(max_length=50, blank=True, null=True)
     derivitive = models.CharField(max_length=50, blank=True, null=True)
     year = models.CharField(max_length=50, blank=True, null=True)
     weight = models.FloatField(blank=True,null=True)
     discount_code = models.ForeignKey(DiscountCode,related_name='discount_code', null=True)
-    retail_price = models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    buy_price = models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    surcharge = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    retail_price = models.DecimalField(max_digits=18, decimal_places=2, null=True)
+    buy_price = models.DecimalField(max_digits=18, decimal_places=2, null=True)
+    surcharge = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     deleted = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
