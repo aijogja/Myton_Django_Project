@@ -12,6 +12,7 @@ class Order(models.Model):
     user = models.ForeignKey(User,related_name='user_order', null=True)
     amount = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     status = models.CharField(max_length=10, choices=STATUS, default=NEW)
+    status_message = models.TextField(blank=True, null=True)
     deleted = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)

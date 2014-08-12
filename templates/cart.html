@@ -5,35 +5,47 @@
 <h3>My Cart</h3>
 
 <div>
-
+<form class="form-horizontal" role="form">
 <table class="table">
     <tr>
         <th>Part Number</th>
         <th>Description</th>        
-        <th class="text-center">Quantity</th>
-        <th>Price</th>
+        <th>Weight</th>
+        <th class="text-center col-sm-1">Quantity</th>
+        <th>Total Price</th>
     </tr>
     
     {% if cart.count > 0 %}
         {% for item in cart %}
         <tr>
             <td>{{ item.product.part_number }}</td>
-            <td>{{ item.product.description }}</td>
-            <td class="text-center">{{ item.quantity }}</td>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.weight }}</td>
+            <td class="text-center">
+                <input type="text" class="form-control" onkeyup="change_qty({{item.product.pk}}, this.value)" value="{{ item.quantity }}">
+            </td>
             <td>{{ item.total_price }}</td>
         </tr>
         {% endfor %}
         <tr>
-            <td colspan="2"></td>
+            <td colspan="3"></td>
             <td>Total Price</td>
             <td>{{ cart.summary }}</td>
         </tr>
     {% else %}
-        <tr><td colspan="4" class="text-center">Cart Empty</td></tr>
+        <tr><td colspan="5" class="text-center">Cart Empty</td></tr>
     {% endif %}
 
 </table>
-
+</form>
 </div>
+{% if cart.count > 0 %}
+<div class="pull-right">
+    <a href="/search" class="btn btn-default">Continue Shopping</a>
+    <a href="/clear-cart" onclick="clear_cart(); return false;" class="btn btn-default">Clear Cart</a>
+    <a href="/checkout" class="btn btn-success">Checkout</a>
+</div>
+{% endif %}
+<div class="clearfix"></div>
 
 {% endblock main_area %}

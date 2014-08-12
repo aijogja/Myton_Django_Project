@@ -14,12 +14,20 @@ from django.template.loader import render_to_string
 # from trade.models import Part
 from apps.product.models import Part
 from apps.customer.models import Profile
+from apps.customer.forms import DeliveryAddress
 from cart import Cart
+
+def custom_proc(request):
+    cart=Cart(request)
+    return {
+        'user': request.user,
+        'cart': cart
+    }
 
 @login_required
 def home(request):
     data = {'breadcrumb': 'home'}
-    return render_to_response('base.html', data, context_instance=RequestContext(request))
+    return render_to_response('base.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
 def add_to_cart(request, product_id):
     if request.is_ajax():
@@ -37,8 +45,31 @@ def mycart(request):
         'breadcrumb': 'my-cart',
         'cart':cart
     }
-    return render_to_response('cart.html', data, context_instance=RequestContext(request))
+    return render_to_response('cart.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
+def clear_cart(request):
+    if request.is_ajax():
+        cart = Cart(request)
+        cart.clear()
+        return HttpResponse('cart was destroyed.')
+    else:
+        return HttpResponseRedirect('/')
+
+def update_cart(request, product_id, value):
+    if request.is_ajax():
+        your_price = calculate_your_price(request, product_id)
+        part = Part.objects.get(id=product_id)
+        cart = Cart(request)
+        cart.update(part, your_price, value)
+        return HttpResponse('part added to cart.')
+    else:
+        return HttpResponseRedirect('/')
+
+def checkout(request):
+    profile = Profile.objects.get(user__username=request.user)
+    form = DeliveryAddress(request.POST or None, instance=profile)
+    data = {'form':form}
+    return render_to_response('checkout.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 # def login(request):
 #     c = {}
 #     c.update(csrf(request))
@@ -122,11 +153,11 @@ def search(request):
         # print q
 
         # run a query on the database
-        part_object = Part.objects.filter(part_number__icontains=q)
+        part_object = Part.objects.filter(part_number__icontains=q,deleted=False)
         data['search_query'] = q
         data['part'] = part_object
 
-    return render_to_response('product/list_product.html', data, context_instance=RequestContext(request))
+    return render_to_response('product/list_product.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
 
 # Calculating discount band

@@ -34,7 +34,10 @@ urlpatterns = patterns('',
 
                        # cart
                        url(r'^addcart/(\d+)/$', 'Myton_Django.views.add_to_cart'),
+                       url(r'^updatecart/(\d+)/(\d+)$', 'Myton_Django.views.update_cart'),
                        url(r'^my-cart/$', 'Myton_Django.views.mycart'),
+                       url(r'^clear-cart/$', 'Myton_Django.views.clear_cart'),
+                       url(r'^checkout/$', 'Myton_Django.views.checkout'),
 
                        # user auth urls
                        url(r'^accounts/login/$', auth_views.login,

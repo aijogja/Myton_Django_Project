@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from apps.customer.forms import UpdateProfile, MyRegistrationForm
 from apps.customer.models import Profile
+from Myton_Django.views import custom_proc
 
 # Create your views here.
 
@@ -22,7 +23,7 @@ def details(request):
         'breadcrumb': 'my-details',
         'form': form,
     }
-    return render_to_response('customer/my_detail.html', data, context_instance=RequestContext(request))
+    return render_to_response('customer/my_detail.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
 
 def register_user(request):
@@ -32,9 +33,9 @@ def register_user(request):
         return HttpResponseRedirect('/accounts/register_success')
 
     data = {'form': form}
-    return render_to_response('customer/register.html', data, context_instance=RequestContext(request))
+    return render_to_response('customer/register.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
 
 def register_success(request):
     data = {}
-    return render_to_response('register_success.html', data, context_instance=RequestContext(request))
+    return render_to_response('register_success.html', data, context_instance=RequestContext(request, processors=[custom_proc]))

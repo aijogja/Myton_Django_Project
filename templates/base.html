@@ -44,7 +44,7 @@
               <li {% if breadcrumb == 'search' %}class="active"{% endif %}><a href="/search/">Part Seach & Stock Check</a></li>
               <li {% if breadcrumb == 'downloads' %}class="active"{% endif %}><a href="/downloads">Downloads</a></li>
               <li {% if breadcrumb == 'my-details' %}class="active"{% endif %}><a href="/my-details">My Details</a></li>
-              <li {% if breadcrumb == 'my-cart' %}class="active"{% endif %}><a href="/my-cart">My Cart</a></li>
+              <li {% if breadcrumb == 'my-cart' %}class="active"{% endif %}><a href="/my-cart">My Cart {% if cart.count %}({{cart.count}}){% endif %}</a></li>
               <li><a href="/accounts/logout">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -66,7 +66,7 @@
     {% endblock main_area %}
 </div>
 
-<div class="well well-sm">{% include "footer.html"%}</div>
+<div class="well well-sm" style="margin-top:20px">{% include "footer.html"%}</div>
 
 <div>
     {% block side_bar %}
@@ -82,10 +82,32 @@ function addtocart(url){
     url: url ,
     type: "GET",
     success: function(msg){
-      alert(msg);      
+      alert(msg); 
+      window.location.href = '/my-cart';
     },
   });
 }
+
+function clear_cart(){
+  $.ajax ({
+    url: '/clear-cart' ,
+    type: "GET",
+    success: function(msg){
+      alert(msg); 
+      window.location.href = '/my-cart';
+    },
+  });
+}
+function change_qty(id,val){
+  $.ajax ({
+    url: '/updatecart/'+id+'/'+val ,
+    type: "GET",
+    success: function(msg){
+      window.location.href = '/my-cart';
+    },
+  });
+}
+
 </script>
 </body>
 </div>
