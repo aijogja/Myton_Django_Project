@@ -21,7 +21,10 @@ class Command(BaseCommand):
 				retail_price = float(quantity_issued_in) * float(retail_price)
 
 			count = count + 1
-			discount_code_leter = discount_code[1]
+			if discount_code:
+				discount_code_leter = discount_code[1]
+			else:
+				discount_code_leter = 'A'
 			buy_price = calculate_buy_price(retail_price,discount_code_leter)
 
 			# Save to the database

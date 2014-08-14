@@ -1,20 +1,22 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import Context, RequestContext
+from django.template.loader import render_to_string
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from forms import MyRegistrationForm
 from django.shortcuts import render
-
+from django import forms
 # experiment - 03.07.2014 - tomc
 from django.http import HttpResponse
-from django.template.loader import render_to_string
 # from trade.models import Part
 from apps.product.models import Part
 from apps.customer.models import Profile
 from apps.customer.forms import DeliveryAddress
+from apps.setup.forms import DeliveryServiceForm
+from apps.setup.models import PostageRate, PostageCountry
 from cart import Cart
 
 def custom_proc(request):
@@ -65,11 +67,43 @@ def update_cart(request, product_id, value):
     else:
         return HttpResponseRedirect('/')
 
-def checkout(request):
-    profile = Profile.objects.get(user__username=request.user)
-    form = DeliveryAddress(request.POST or None, instance=profile)
-    data = {'form':form}
-    return render_to_response('checkout.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
+# def checkout(request):
+#     profile = Profile.objects.get(user__username=request.user)
+#     form = DeliveryAddress(request.POST or None, instance=profile)
+#     delivery_form = DeliveryServiceForm(request.POST or None)
+
+#     if form.is_valid() and delivery_form.is_valid():
+#         #import pdb; pdb.set_trace()
+
+#         pass
+        
+
+#     try:        
+#         check_band = PostageCountry.objects.get(country=profile.country)
+#         band = check_band.band
+#     except:
+#         band = '1'
+#     delivery_form.fields['service'] = forms.ModelChoiceField(required=True, queryset=PostageRate.objects.all().filter(band=band), widget=forms.Select(attrs={'class': 'form-control'}))
+
+#     data = {'form':form,'delivery_form':delivery_form}
+#     return render_to_response('checkout.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
+
+def get_delivery(request,country):
+    if request.is_ajax():
+        delivery_form = DeliveryServiceForm()
+        try:
+            check_band = PostageCountry.objects.get(country=country)
+            band = check_band.band
+        except:
+            band = '1'
+        delivery_form.fields['service'] = forms.ModelChoiceField(queryset=PostageRate.objects.all().filter(band=band), widget=forms.Select(attrs={'class': 'form-control'}))    
+        cek = render_to_string('delivery_service_select_form.html', {'delivery_form': delivery_form})
+
+        return HttpResponse(cek)
+    else:
+        return HttpResponseRedirect('/')
+    
+
 # def login(request):
 #     c = {}
 #     c.update(csrf(request))

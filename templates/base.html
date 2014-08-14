@@ -77,6 +77,20 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 <script type="text/javascript">
+$(function(){  
+  $('#country_delivery').change(function(){ 
+    $('#delivery_service').html('loading');
+    country = $(this).val();
+    $.ajax ({
+      url: '/get_delivery/'+ country,
+      type: "GET",
+      success: function(msg){
+        $('#delivery_service').html(msg);
+      },
+    });
+  });
+});
+
 function addtocart(url){
   $.ajax ({
     url: url ,

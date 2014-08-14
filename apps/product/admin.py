@@ -10,7 +10,9 @@ class DiscountCodeAdmin(admin.ModelAdmin):
     ordering = ['code']
 
 class PartAdmin(admin.ModelAdmin):
-    list_display = ['part_number', 'name', 'discount_code', 'retail_price', 'buy_price']
+    list_display = ['part_number', 'name', 'discount_code', 'weight', 'retail_price', 'buy_price', 'surcharge']
+    list_filter = ['discount_code']
+    search_fields = ['part_number']
 
 admin.site.register(Car)
 admin.site.register(Model)

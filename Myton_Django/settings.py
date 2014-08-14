@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'apps.customer',
     'apps.files',
     'apps.product',
+    'apps.setup',
     'cart',
     'south',
     'smart_selects',
@@ -85,7 +86,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-DATABASES['default'] =  dj_database_url.config()
+# DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization
