@@ -28,9 +28,14 @@
         </tr>
         {% endfor %}
         <tr>
-            <td colspan="3"></td>
-            <td>Total Price</td>
+            <td colspan="2"></td>
+            <td colspan="2" class="text-right">Total Price</td>
             <td>{{ cart.summary }}</td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td colspan="2" class="text-right">Total Weight (Kg)</td>
+            <td>{{request.session.total_weight}}</td>
         </tr>
     {% else %}
         <tr><td colspan="5" class="text-center">Cart Empty</td></tr>

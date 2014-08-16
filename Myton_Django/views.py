@@ -35,6 +35,7 @@ def add_to_cart(request, product_id):
     if request.is_ajax():
         your_price = calculate_your_price(request, product_id)
         part = Part.objects.get(id=product_id)
+        #the_price = float(part.surcharge) + float(your_price)
         cart = Cart(request)
         cart.add(part, your_price, 1)
         return HttpResponse('part added to cart.')
@@ -43,9 +44,14 @@ def add_to_cart(request, product_id):
 
 def mycart(request):
     cart=Cart(request)
+    weight = 0
+    for ca in cart:
+        weight = weight + (ca.product.weight * ca.quantity)
+    request.session['total_weight'] = weight
     data = {
         'breadcrumb': 'my-cart',
-        'cart':cart
+        'cart':cart,
+        # 'total_weight' : weight
     }
     return render_to_response('cart.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
@@ -61,6 +67,7 @@ def update_cart(request, product_id, value):
     if request.is_ajax():
         your_price = calculate_your_price(request, product_id)
         part = Part.objects.get(id=product_id)
+        #the_price = float(part.surcharge) + float(your_price)
         cart = Cart(request)
         cart.update(part, your_price, value)
         return HttpResponse('part added to cart.')

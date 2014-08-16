@@ -11,3 +11,4 @@ register = template.Library()
 @register.simple_tag
 def your_price(request, product_id):
     return calculate_your_price(request,product_id)
+

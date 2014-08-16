@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'apps.files',
     'apps.product',
     'apps.setup',
+    'apps.order',
     'cart',
     'south',
     'smart_selects',
