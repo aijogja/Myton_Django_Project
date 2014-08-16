@@ -6,3 +6,15 @@
 	margin-bottom: 0px;
 	padding: 7px;
 }
+.account-cart-box {
+	background: #233357
+}
+a.account-cart {
+	padding: 10px;
+	text-decoration: none;
+	color: #fff;
+	font-size: 18px;
+}
+.account-cart > .badge {
+	background: red	
+}

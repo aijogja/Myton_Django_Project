@@ -14,16 +14,18 @@
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+
 </head>
 <div class="container">
 <body class ="body">
 
-<div class="image_header">
-    <img src="{{ STATIC_URL }}img/mainlogo.jpg" width="180" height="73">
+<div class="image_header clearfix">
+    <div class="col-md-6"><img src="{{ STATIC_URL }}img/mainlogo.jpg" width="180" height="73"></div>    
+    <div class="well well-lg col-md-3 pull-right account-cart-box">
+    <a href="/my-cart" class="account-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart {% if cart.count %}<span class="badge">{{cart.count}}</span>{% endif %}</a>
+    <a href="/my-details" class="account-cart"><span class="glyphicon glyphicon-user"></span> Account</a>
+    </div>
 </div>
-
-
-
 
 <div class="navbar navbar-inverse">
         <div class="container">
@@ -42,9 +44,7 @@
               <li {% if breadcrumb == 'latest-news' %}class="active"{% endif %}><a href="/latest-news">Latest News</a></li>
               <li {% if breadcrumb == 'my-orders' %}class="active"{% endif %}><a href="/my-orders">My Orders</a></li>
               <li {% if breadcrumb == 'search' %}class="active"{% endif %}><a href="/search/">Part Seach & Stock Check</a></li>
-              <li {% if breadcrumb == 'downloads' %}class="active"{% endif %}><a href="/downloads">Downloads</a></li>
-              <li {% if breadcrumb == 'my-details' %}class="active"{% endif %}><a href="/my-details">My Details</a></li>
-              <li {% if breadcrumb == 'my-cart' %}class="active"{% endif %}><a href="/my-cart">My Cart {% if cart.count %}({{cart.count}}){% endif %}</a></li>
+              <li {% if breadcrumb == 'downloads' %}class="active"{% endif %}><a href="/downloads">Downloads</a></li>              
               <li><a href="/accounts/logout">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -96,7 +96,7 @@ function addtocart(url){
     url: url ,
     type: "GET",
     success: function(msg){
-      alert(msg); 
+      //alert(msg); 
       window.location.href = '/my-cart';
     },
   });
