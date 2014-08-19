@@ -58,18 +58,23 @@ def checkout(request):
         orderdelivery.cost = delivery_cost
         orderdelivery.save()
         cart.clear()
+        return HttpResponseRedirect('/')
 
     try:        
         check_band = PostageCountry.objects.get(country=profile.country)
         band = check_band.band
     except:
-        band = '1'
-    
+        band = ''    
     total_weight = request.session['total_weight']
     delivery_form.fields['service'] = forms.ModelChoiceField(required=True, queryset=PostageRate.objects.all().filter(band=band), widget=forms.Select(attrs={'class': 'form-control'}))
 
     data = {'form':form,'delivery_form':delivery_form}
-    return render_to_response('checkout.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
+    return render_to_response('order/checkout.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
 def order_complete(request):
     return render_to_response('order_complete.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
+
+def myorder(request):
+    myorder = Order.objects.filter(user=request.user)
+    data = {'order':myorder}
+    return render_to_response('order/myorder.html', data, context_instance=RequestContext(request, processors=[custom_proc]))

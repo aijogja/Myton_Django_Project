@@ -46,7 +46,7 @@ def mycart(request):
     cart=Cart(request)
     weight = 0
     for ca in cart:
-        weight = weight + (ca.product.weight * ca.quantity)
+        weight = weight + (float(ca.product.weight) * int(ca.quantity))
     request.session['total_weight'] = weight
     data = {
         'breadcrumb': 'my-cart',

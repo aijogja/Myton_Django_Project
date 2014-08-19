@@ -51,7 +51,7 @@ class DiscountCode(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = "DiscountCode"
+        verbose_name_plural = "Discount Code"
 
     def __unicode__(self):
         return self.code
@@ -68,7 +68,7 @@ class Part(models.Model):
     chassis_range = models.CharField(max_length=50, blank=True, null=True)
     derivitive = models.CharField(max_length=50, blank=True, null=True)
     year = models.CharField(max_length=50, blank=True, null=True)
-    weight = models.FloatField(blank=True,null=True)
+    weight = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
     discount_code = models.ForeignKey(DiscountCode,related_name='discount_code', null=True)
     retail_price = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     buy_price = models.DecimalField(max_digits=18, decimal_places=2, null=True)

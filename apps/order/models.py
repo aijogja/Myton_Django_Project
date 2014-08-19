@@ -10,35 +10,47 @@ import random
 class Order(models.Model):
     STATUS = (('NEW','New Order'),('AWD', 'Awaiting Dispatch'),('CNL','Cancelled'),('CNF','Confirmed'))
 
-    order_no = models.CharField(max_length=30, null=True)
+    order_no = models.CharField(max_length=30, unique=True, null=True)
     user = models.ForeignKey(User,related_name='user_order', null=True)
     amount = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     status = models.CharField(max_length=10, choices=STATUS, default='NEW')
-    status_message = models.TextField(blank=True, null=True)  
+    status_message = models.TextField("Status message (customer visible)", blank=True, null=True)  
     order_notes = models.TextField(blank=True, null=True)  
     deleted = models.BooleanField(default=False)
-    created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField("Order date", auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = "Order"
 
     def save(self, *args, **kwargs):
-        random_string = ''.join(random.choice(string.digits) for i in range(5))
-        self.order_no = random_string
+        if not self.order_no:
+            self.order_no = Order.order_no_generator()
         super(Order, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.order_no
 
+    @classmethod
+    def order_no_generator(cls):
+        size = 10
+        chars = string.digits
+        return ''.join(random.choice(chars) for x in range(size))
+
 class OrderDetail(models.Model):
-    order = models.ForeignKey(Order, related_name="order")
+    order = models.ForeignKey(Order, related_name="order_detail")
     product = models.ForeignKey(Part, related_name="product")
     price = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     qty = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Order Detail"
+
+    def __unicode__(self):
+        return self.product
 
 class OrderDelivery(models.Model):
     order = models.OneToOneField(Order, related_name="order_delivery")
@@ -55,3 +67,19 @@ class OrderDelivery(models.Model):
     cost = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Order Delivery"
+
+    def __unicode__(self):
+        return self.order
+
+class OrderComment(models.Model):
+    order = models.ForeignKey(Order, related_name="order_comment")
+    user = models.ForeignKey(User,related_name='user_order_comment',blank=True, null=True)
+    comment = models.TextField(blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Order Comment"
