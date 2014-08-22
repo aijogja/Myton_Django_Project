@@ -10,7 +10,7 @@ import random
 class Order(models.Model):
     STATUS = (('NEW','New Order'),('AWD', 'Awaiting Dispatch'),('CNL','Cancelled'),('CNF','Confirmed'))
 
-    order_no = models.CharField(max_length=30, unique=True, null=True)
+    order_no = models.CharField("Order number",max_length=30, unique=True, null=True)
     user = models.ForeignKey(User,related_name='user_order', null=True)
     amount = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     status = models.CharField(max_length=10, choices=STATUS, default='NEW')
