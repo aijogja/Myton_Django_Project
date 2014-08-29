@@ -1,5 +1,6 @@
 Django==1.6.5
 Pillow==2.3.0
+PyPDF2==1.23
 South==1.0
 argparse==1.2.1
 dj-database-url==0.3.0
@@ -9,6 +10,10 @@ django-grappelli==2.4.8
 django-smart-selects==1.0.9
 django-toolbelt==0.0.1
 gunicorn==19.1.0
+html5lib==1.0b3
 psycopg2==2.5.3
+reportlab==3.1.8
+six==1.7.3
 static3==0.5.1
 wsgiref==0.1.2
+xhtml2pdf==0.0.6
