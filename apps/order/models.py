@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 from apps.product.models import Part
+from datetime import datetime
 import string
 import random
 
@@ -13,6 +14,7 @@ class Order(models.Model):
     order_no = models.CharField("Order number",max_length=30, unique=True, null=True)
     user = models.ForeignKey(User,related_name='user_order', null=True)
     amount = models.DecimalField(max_digits=18, decimal_places=2, null=True)
+    vat = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     status = models.CharField(max_length=10, choices=STATUS, default='NEW')
     status_message = models.TextField("Status message (customer visible)", blank=True, null=True)  
     order_notes = models.TextField(blank=True, null=True)  
@@ -33,13 +35,21 @@ class Order(models.Model):
 
     @classmethod
     def order_no_generator(cls):
-        size = 10
+        date_str = datetime.now().strftime("%y%m%d%H%M")
+        size = 3
         chars = string.digits
-        return ''.join(random.choice(chars) for x in range(size))
+        random_scring =  ''.join(random.choice(chars) for x in range(size))
+        return date_str + random_scring
+
+    def detail_order_data(self):
+        order = self.order_detail.all()
+        return order
 
 class OrderDetail(models.Model):
     order = models.ForeignKey(Order, related_name="order_detail")
     product = models.ForeignKey(Part, related_name="product")
+    weight = models.DecimalField(max_digits=18, decimal_places=2, null=True)
+    surcharge = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     price = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     qty = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=18, decimal_places=2, null=True)
@@ -64,6 +74,7 @@ class OrderDelivery(models.Model):
     postcode = models.CharField(max_length=10, null=True)
     country = CountryField(max_length=100, blank=True, null=True)
     telephone = models.CharField(max_length=50, null=True)    
+    service = models.CharField(max_length=255, null=True)
     cost = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)

@@ -9,7 +9,7 @@ from django_countries.fields import CountryField
 class Profile(models.Model):
     BAND = (('A', 'A'),('B', 'B'),('C', 'C'),('D', 'D'),('E', 'E'),('F', 'F'))
 
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name="profile")
     first_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255, null=True)
     business_name = models.CharField(max_length=255, blank=True, null=True)

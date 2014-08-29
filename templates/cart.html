@@ -9,10 +9,12 @@
 <table class="table">
     <tr>
         <th>Part Number</th>
-        <th>Description</th>        
+        <th>Description</th>     
+        <th class="text-center col-sm-1">Quantity</th>   
         <th>Weight</th>
-        <th class="text-center col-sm-1">Quantity</th>
-        <th>Total Price</th>
+        <th>Surcharge ex VAT</th>
+        <th>Price ex VAT</th>
+        <th>Total Price ex VAT</th>
     </tr>
     
     {% if cart.count > 0 %}
@@ -20,25 +22,27 @@
         <tr>
             <td>{{ item.product.part_number }}</td>
             <td>{{ item.product.name }}</td>
-            <td>{{ item.product.weight }}</td>
             <td class="text-center">
                 <input type="text" class="form-control" onkeyup="change_qty({{item.product.pk}}, this.value)" value="{{ item.quantity }}">
             </td>
+            <td>{{ item.product.weight }}</td>
+            <td>{{ item.surcharge }}</td>
+            <td>{{ item.unit_price }}</td>
             <td>{{ item.total_price }}</td>
         </tr>
         {% endfor %}
         <tr>
-            <td colspan="2"></td>
-            <td colspan="2" class="text-right">Total Price</td>
+            <td colspan="4"></td>
+            <td colspan="2" class="text-right">Total ex VAT</td>
             <td>{{ cart.summary }}</td>
         </tr>
         <tr>
-            <td colspan="2"></td>
+            <td colspan="4"></td>
             <td colspan="2" class="text-right">Total Weight (Kg)</td>
             <td>{{request.session.total_weight}}</td>
         </tr>
     {% else %}
-        <tr><td colspan="5" class="text-center">Cart Empty</td></tr>
+        <tr><td colspan="7" class="text-center">Cart Empty</td></tr>
     {% endif %}
 
 </table>

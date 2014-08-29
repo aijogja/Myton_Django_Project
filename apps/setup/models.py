@@ -38,3 +38,16 @@ class PostageRate(models.Model):
 
     def __unicode__(self):
         return '%s - %s' % (self.title, self.cost)
+
+class Setting(models.Model):    
+    title = models.CharField(max_length=225, null=True)    
+    slug = models.CharField(max_length=200, null=True, editable=False)
+    value = models.CharField(max_length=255, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Setting"
+
+    def __unicode__(self):
+        return '%s' % (self.title)

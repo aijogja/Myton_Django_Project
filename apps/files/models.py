@@ -43,11 +43,6 @@ class ProductList(models.Model):
             self.title = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         super(ProductList, self).save(*args, **kwargs)
 
-    # def delete(self, *args, **kwargs):
-    #     storage, path = self.file_upload.storage, self.file_upload.path
-    #     super(ProductList, self).delete(*args, **kwargs)
-    #     storage.delete(path)
-
     class Meta:
         verbose_name_plural = "Product List Upload"
 

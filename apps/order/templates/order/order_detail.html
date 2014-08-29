@@ -1,0 +1,63 @@
+<h4>4. Order Detail</h4>
+<table class="table">
+    <tr class="info">
+        <th>Part Number</th>
+        <th>Description</th>     
+        <th class="text-center col-sm-1">Quantity</th>   
+        <th>Weight</th>
+        <th>Surcharge ex VAT</th>
+        <th>Price exc VAT</th>
+        <th>Total exc VAT</th>
+        <th>VAT</th>
+        <th>Total inc VAT</th>
+    </tr>
+    
+    {% if cart.count > 0 %}
+        {% for item in cart %}
+        <tr>
+            <td>{{ item.product.part_number }}</td>
+            <td>{{ item.product.name }}</td>
+            <td class="text-center col-sm-1">{{ item.quantity }}</td>            
+            <td>{{ item.product.weight }}</td>
+            <td>{{ item.surcharge }}</td>
+            <td>{{ item.unit_price }}</td>
+            <td>{{ item.total_price }}</td>
+            <td>{{ vat }}%</td>
+            <td>{% price_inc_tax item.total_price vat %}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="6"></td>
+            <td colspan="2" class="text-right">Total Weight (Kg)</td>
+            <td>{{request.session.total_weight}}</td>
+        </tr>        
+        <tr>
+            <td colspan="6"></td>
+            <td colspan="2" class="text-right">Total ex VAT</td>
+            <td class="warning">{{cart.summary}}</td>
+        </tr>
+        <tr>
+            <td colspan="6"></td>
+            <td colspan="2" class="text-right">Total VAT</td>
+            <td class="warning">
+                {% vat_value cart.summary vat %}
+                <input type="hidden" name="tot_vat" value="{% vat_value cart.summary vat %}">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6"></td>
+            <td colspan="2" class="text-right">Delivery Service</td>
+            <td class="warning">{{service.cost}}</td>
+        </tr>
+        <tr>
+            <td colspan="6"></td>
+            <td colspan="2" class="text-right">Total Payment</td>
+            <td class="danger">{% total_payment cart.summary vat service.cost %}</td>
+        </tr>
+    {% endif %}
+
+</table>
+<div class="form-group pull-right">          
+	<div class="col-sm-12">
+	<input type="submit" class="btn btn-success" value="Continue">
+</div>

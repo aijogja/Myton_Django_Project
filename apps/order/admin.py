@@ -1,9 +1,12 @@
 from django.contrib import admin
+from django.http import HttpResponseRedirect, HttpResponse
 from apps.order.models import Order, OrderDetail, OrderDelivery, OrderComment
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, render_to_response
+from django.template.loader import render_to_string
 from django.template import Context, RequestContext
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
 class OrderDetailInline(admin.StackedInline):
     model = OrderDetail
@@ -12,7 +15,7 @@ class OrderDetailInline(admin.StackedInline):
 
     def get_readonly_fields(self, request, obj):
         if obj:
-            return ['product','price', 'qty', 'amount']
+            return ['product', 'weight', 'surcharge', 'price', 'qty', 'amount']
         else:
             return []
     
@@ -38,7 +41,7 @@ class OrderDeliveryInline(admin.StackedInline):
 
     def get_readonly_fields(self, request, obj):
         if obj:
-            return ['country','cost']
+            return ['country','service','cost']
         else:
             return []
 
@@ -60,7 +63,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj):
         if obj:
-            return self.readonly_fields + ('user','amount','order_no')
+            return self.readonly_fields + ('user', 'order_no', 'amount', 'vat')
         return self.readonly_fields
 
     def has_add_permission(self, request):
@@ -76,9 +79,27 @@ class OrderAdmin(admin.ModelAdmin):
 
     # Invoice PDF preview
     def invoice_pdf(self, request, order_no):
-        order = Order.objects.get(order_no=order_no)
-        data = {'order':order}
-        return render_to_response('admin/order/invoice.html', data, context_instance=RequestContext(request))
+        import xhtml2pdf.pisa as pisa
+        import cStringIO
+        filename = '/pdfs/'+str(order_no)+'.pdf'
+        file_path = settings.MEDIA_ROOT+filename
+        img = open("static/img/mainlogo.jpg","rb")
+        logo = img.read()
+        logo_encode = "data:image/jpg;base64,%s" % logo.encode('base64')
+
+        order = Order.objects.select_related('order_delivery').get(order_no=order_no)
+
+        data = {'order':order, 'logo':logo_encode}
+        result = render_to_string('admin/order/invoice.html', data, context_instance=RequestContext(request))
+        pdf = pisa.CreatePDF(cStringIO.StringIO(result.encode('UTF-8')), file(file_path, "wb"))
+
+        if not pdf.err:
+            pdf.dest.close()
+            hasil = {'order':order,'hsl':'OK'}
+        else:
+            hasil = {'order':order,'hsl':'FAILED'}
+        return HttpResponseRedirect('/static/media/'+filename)
+        # return render_to_response('admin/order/invoice.html', hasil, context_instance=RequestContext(request))
 
     def get_urls(self):
         urls = super(OrderAdmin,self).get_urls()

@@ -42,7 +42,7 @@
             <ul class="nav navbar-nav">
               <li {% if breadcrumb == 'home' %}class="active"{% endif %}><a href="/">Home</a></li>
               <li {% if breadcrumb == 'latest-news' %}class="active"{% endif %}><a href="/latest-news">Latest News</a></li>
-              <li {% if breadcrumb == 'my-orders' %}class="active"{% endif %}><a href="/my-orders">My Orders</a></li>
+              <li {% if breadcrumb == 'myorder' %}class="active"{% endif %}><a href="/my-orders">My Orders</a></li>
               <li {% if breadcrumb == 'search' %}class="active"{% endif %}><a href="/search/">Part Seach & Stock Check</a></li>
               <li {% if breadcrumb == 'downloads' %}class="active"{% endif %}><a href="/downloads">Downloads</a></li>              
               <li><a href="/accounts/logout">Logout</a></li>
@@ -74,18 +74,33 @@
     {% endblock side_bar %}
 </div>
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
 <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){  
   $('#country_delivery').change(function(){ 
     $('#delivery_service').html('loading');
+    $('#order_detail').html('<div class="form-group pull-right"><div class="col-sm-12"><span class="btn btn-success" disabled="disabled">Continue</span></div>');
     country = $(this).val();
     $.ajax ({
       url: '/get_delivery/'+ country,
       type: "GET",
       success: function(msg){
+        // alert(msg);
         $('#delivery_service').html(msg);
+      },
+    });
+  });
+
+  $('#id_service').live('change',function(){ 
+    var service = $(this).val();
+    $('#order_detail').html('loading');
+    $.ajax ({
+      url: '/get_detail_order/'+service,
+      type: "GET",
+      success: function(msg){
+        $('#order_detail').html(msg);
       },
     });
   });

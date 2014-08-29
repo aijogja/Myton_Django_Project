@@ -35,9 +35,9 @@ def add_to_cart(request, product_id):
     if request.is_ajax():
         your_price = calculate_your_price(request, product_id)
         part = Part.objects.get(id=product_id)
-        #the_price = float(part.surcharge) + float(your_price)
+        # import pdb; pdb.set_trace()
         cart = Cart(request)
-        cart.add(part, your_price, 1)
+        cart.add(part, your_price, part.surcharge, 1)
         return HttpResponse('part added to cart.')
     else:
         return HttpResponseRedirect('/')
@@ -63,13 +63,12 @@ def clear_cart(request):
     else:
         return HttpResponseRedirect('/')
 
-def update_cart(request, product_id, value):
+def update_cart(request, product_id, qty):
     if request.is_ajax():
         your_price = calculate_your_price(request, product_id)
         part = Part.objects.get(id=product_id)
-        #the_price = float(part.surcharge) + float(your_price)
         cart = Cart(request)
-        cart.update(part, your_price, value)
+        cart.update(part, qty)
         return HttpResponse('part added to cart.')
     else:
         return HttpResponseRedirect('/')
@@ -95,20 +94,7 @@ def update_cart(request, product_id, value):
 #     data = {'form':form,'delivery_form':delivery_form}
 #     return render_to_response('checkout.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
-def get_delivery(request,country):
-    if request.is_ajax():
-        delivery_form = DeliveryServiceForm()
-        try:
-            check_band = PostageCountry.objects.get(country=country)
-            band = check_band.band
-        except:
-            band = '1'
-        delivery_form.fields['service'] = forms.ModelChoiceField(queryset=PostageRate.objects.all().filter(band=band), widget=forms.Select(attrs={'class': 'form-control'}))    
-        cek = render_to_string('delivery_service_select_form.html', {'delivery_form': delivery_form})
 
-        return HttpResponse(cek)
-    else:
-        return HttpResponseRedirect('/')
     
 
 # def login(request):

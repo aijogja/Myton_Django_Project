@@ -38,7 +38,8 @@ urlpatterns = patterns('',
                        url(r'^my-cart/$', 'Myton_Django.views.mycart'),
                        url(r'^clear-cart/$', 'Myton_Django.views.clear_cart'),
                        url(r'^checkout/$', 'apps.order.views.checkout'),
-                       url(r'^get_delivery/(\w+)$', 'Myton_Django.views.get_delivery'),
+                       url(r'^get_delivery/(\w+)$', 'apps.order.views.get_delivery'),
+                       url(r'^get_detail_order/(\d+)$', 'apps.order.views.get_detail_order'),                       
 
                        # user auth urls
                        url(r'^accounts/login/$', auth_views.login,
