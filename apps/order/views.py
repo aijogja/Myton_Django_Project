@@ -20,6 +20,7 @@ def get_delivery(request,country):
         try:
             check_band = PostageCountry.objects.get(country=country)
             band = check_band.band
+            request.session['vat'] = check_band.vat
         except:
             band = ''
         delivery_form.fields['service'] = forms.ModelChoiceField(queryset=PostageRate.objects.all().filter(band=band,active=True,weight_start__lte=tot_weight,weight_to__gte=tot_weight), widget=forms.Select(attrs={'class': 'form-control'}))
@@ -31,12 +32,18 @@ def get_delivery(request,country):
 
 def get_detail_order(request,service):
     # if request.is_ajax():
-    service_rate = PostageRate.objects.get(pk=service)
-    cart=Cart(request)
-    vat = Setting.objects.get(slug='vat')
-    data = {'cart':cart, 'service':service_rate, 'vat':vat.value}
-    cek = render_to_string('order/order_detail.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
-    return HttpResponse(cek)
+        profile = Profile.objects.get(user__username=request.user)
+        service_rate = PostageRate.objects.get(pk=service)
+        cart=Cart(request)
+
+        if request.session['vat'] and not profile.vat_free :
+            vat = Setting.objects.get(slug='vat')
+            vat = vat.value
+        else:
+            vat = 0
+        data = {'cart':cart, 'service':service_rate, 'vat':vat}
+        cek = render_to_string('order/order_detail.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
+        return HttpResponse(cek)
     # else:
         # return HttpResponseRedirect('/')
 
@@ -50,7 +57,7 @@ def checkout(request):
     form = DeliveryAddress(request.POST or None, instance=profile)
     delivery_form = DeliveryServiceForm(request.POST or None)
 
-    if form.is_valid() and delivery_form.is_valid():
+    if form.is_valid() and delivery_form.is_valid():        
         delivery_cost = delivery_form.cleaned_data['service']
         tot_vat = request.POST.get('tot_vat')
         # import pdb; pdb.set_trace()
@@ -93,11 +100,12 @@ def checkout(request):
         return HttpResponseRedirect('/')
 
     try:        
-        check_band = PostageCountry.objects.get(country=profile.country)
-        band = check_band.band
+        check_band = PostageCountry.objects.get(country=profile.country)        
+        band = check_band.band        
+        request.session['vat'] = check_band.vat
     except:
         band = ''    
-    tot_weight = request.session['total_weight']
+    tot_weight = request.session['total_weight']    
     delivery_form.fields['service'] = forms.ModelChoiceField(required=True, queryset=PostageRate.objects.all().filter(band=band,active=True,weight_start__lte=tot_weight,weight_to__gte=tot_weight), widget=forms.Select(attrs={'class': 'form-control'}))
 
     data = {'form':form,'delivery_form':delivery_form}

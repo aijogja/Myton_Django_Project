@@ -5,7 +5,7 @@ from django_countries.fields import CountryField
 
 class PostageCountry(models.Model):
     BAND = (('1', '1'),('2', '2'),('3', '3'),('4', '4'),('5', '5'),('6', '6'),('7', '7'),('8', '8'),('9', '9'),('10', '10'))
-    country = CountryField(max_length=100, null=True)
+    country = CountryField(max_length=100, null=True, unique=True)
     band = models.CharField(max_length=10, choices=BAND, default='1', null=True)
     vat = models.BooleanField(default=False)
     active = models.BooleanField(default=True)

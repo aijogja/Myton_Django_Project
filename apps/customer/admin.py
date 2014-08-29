@@ -2,7 +2,7 @@ from django.contrib import admin
 from apps.customer.models import Profile
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'business_name', 'first_name', 'last_name','customer_email','telephone','mobile','discount']
+    list_display = ['user', 'business_name', 'first_name', 'last_name','customer_email','telephone','mobile','discount', 'vat_free', 'vat_number']
     list_filter = ['discount']
     search_fields = ['first_name', 'last_name', 'user__email']
 

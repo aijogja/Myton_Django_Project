@@ -76,7 +76,7 @@ class DeliveryAddress(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ['user', 'discount','vat','mailing_list','special_offers']
+        exclude = ['user', 'discount','vat_free','vat_number','mailing_list','special_offers']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
