@@ -257,7 +257,7 @@ def create_pdf(request, order_no):
     directory = os.path.join(settings.MEDIA_ROOT,'pdfs')
     file_path = settings.MEDIA_ROOT+filename
     if not os.path.exists(directory):
-        os.mkdir(directory)
+        os.makedirs(directory)
 
     img = open("static/img/mainlogo.jpg","rb")
     logo = img.read()
