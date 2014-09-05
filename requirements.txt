@@ -5,12 +5,16 @@ South==1.0
 argparse==1.2.1
 dj-database-url==0.3.0
 dj-static==0.0.6
+django-appconf==0.6
 django-countries==2.1.2
 django-grappelli==2.4.8
+django-imagekit==3.2.2
 django-smart-selects==1.0.9
+django-tinymce==1.5.2
 django-toolbelt==0.0.1
 gunicorn==19.1.0
 html5lib==1.0b3
+pilkit==1.1.9
 psycopg2==2.5.3
 reportlab==3.1.8
 six==1.7.3
