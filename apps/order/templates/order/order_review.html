@@ -3,7 +3,7 @@
 {% block main_area %}
 
 <h3>Order Review #{{myorder.order_no}}</h3>
-<a href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-file"></span> Invoice PDF</a><br><br>
+<a href="/invoice/{{myorder.order_no}}" target="_blank" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-file"></span> Invoice PDF</a><br><br>
 <table class="table">
     <thead>
         <tr class="info">

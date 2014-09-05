@@ -17,6 +17,7 @@ from apps.customer.models import Profile
 from apps.customer.forms import DeliveryAddress
 from apps.setup.forms import DeliveryServiceForm
 from apps.setup.models import PostageRate, PostageCountry
+from apps.order.models import Order, OrderDetail, OrderDelivery, OrderComment
 from cart import Cart
 
 def custom_proc(request):
@@ -245,3 +246,28 @@ def discount_band_B(split_amount, split_amount_2):
     split_amount_2 = discount_band_C (split_amount, split_amount_2)
     split_amount_2 = split_amount_2 + split_amount
     return split_amount_2
+
+def create_pdf(request, order_no):
+    from django.conf import settings
+    import xhtml2pdf.pisa as pisa
+    import cStringIO
+    import os
+    
+    filename = '/pdfs/'+str(order_no)+'.pdf'
+    directory = os.path.join(settings.MEDIA_ROOT,'pdfs')
+    file_path = settings.MEDIA_ROOT+filename
+    if not os.path.exists(directory):
+        os.mkdir(directory)
+
+    img = open("static/img/mainlogo.jpg","rb")
+    logo = img.read()
+    logo_encode = "data:image/jpg;base64,%s" % logo.encode('base64')
+
+    order = Order.objects.select_related('order_delivery').get(order_no=order_no)
+    total = order.amount - order.order_delivery.cost - order.vat
+    vat_percent = '%0.0f' % ((order.vat/total)*100)
+    # import pdb; pdb.set_trace()
+    data = {'order':order, 'logo':logo_encode, 'vat':vat_percent}
+    result = render_to_string('admin/order/invoice.html', data, context_instance=RequestContext(request))
+    pdf = pisa.CreatePDF(cStringIO.StringIO(result.encode('UTF-8')), file(file_path, "wb"))
+    return filename

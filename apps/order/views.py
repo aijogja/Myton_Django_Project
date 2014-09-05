@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django import forms
 
-from Myton_Django.views import custom_proc
+from Myton_Django.views import custom_proc, create_pdf
 from apps.customer.models import Profile
 from apps.customer.forms import DeliveryAddress
 from apps.setup.forms import DeliveryServiceForm
@@ -136,3 +136,9 @@ def order_review(request, ordernumber):
     vat_percent = '%0.0f' % ((myorder.vat/total)*100)
     data = {'breadcrumb':'myorder', 'myorder':myorder, 'vat':vat_percent}
     return render_to_response('order/order_review.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
+
+@login_required
+def invoice(request,ordernumber):
+    filename = create_pdf(request, ordernumber)
+    return HttpResponseRedirect('/static/media/'+filename)
+

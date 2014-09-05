@@ -167,3 +167,5 @@ STATICFILES_FINDERS = (
 GRAPPELLI_ADMIN_TITLE = 'Myton Automotive'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -1,12 +1,15 @@
 from django.contrib import admin
 from django.http import HttpResponseRedirect, HttpResponse
-from apps.order.models import Order, OrderDetail, OrderDelivery, OrderComment
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, render_to_response
 from django.template.loader import render_to_string
 from django.template import Context, RequestContext
 from django.conf.urls import patterns, include, url
-from django.conf import settings
+from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.contrib import messages
+from Myton_Django.views import custom_proc, create_pdf
+from apps.order.models import Order, OrderDetail, OrderDelivery, OrderComment
+from apps.order.forms import Send_email
 
 class OrderDetailInline(admin.StackedInline):
     model = OrderDetail
@@ -56,7 +59,7 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderDetailInline, OrderDeliveryInline, CommentInline]
 
     def list_action(self, obj):
-        return '<a href="invoice/'+ str(obj.order_no) +'" target="_blank">Invoice</a>'
+        return '<a href="invoice/'+ str(obj.order_no) +'" target="_blank">Invoice</a> | '+'<a href="send_email/'+ str(obj.order_no) +'">Send Email</a>'
     list_action.short_description = "Action"
     list_action.allow_tags = True
 
@@ -82,37 +85,35 @@ class OrderAdmin(admin.ModelAdmin):
 
     # Invoice PDF preview
     def invoice_pdf(self, request, order_no):
-        import xhtml2pdf.pisa as pisa
-        import cStringIO
-        import os
-        
-        filename = '/pdfs/'+str(order_no)+'.pdf'
-        directory = os.path.join(settings.MEDIA_ROOT,'pdfs')
-        file_path = settings.MEDIA_ROOT+filename
-        if not os.path.exists(directory):
-            os.mkdir(directory)
-
-        img = open("static/img/mainlogo.jpg","rb")
-        logo = img.read()
-        logo_encode = "data:image/jpg;base64,%s" % logo.encode('base64')
-
-        order = Order.objects.select_related('order_delivery').get(order_no=order_no)
-        import pdb; pdb.set_trace()
-        data = {'order':order, 'logo':logo_encode}
-        result = render_to_string('admin/order/invoice.html', data, context_instance=RequestContext(request))
-        pdf = pisa.CreatePDF(cStringIO.StringIO(result.encode('UTF-8')), file(file_path, "wb"))
-
-        if not pdf.err:
-            pdf.dest.close()
-            hasil = {'order':order,'hsl':'OK'}
-        else:
-            hasil = {'order':order,'hsl':'FAILED'}
+        filename = create_pdf(request, order_no)
         return HttpResponseRedirect('/static/media/'+filename)
-        # return render_to_response('admin/order/invoice.html', hasil, context_instance=RequestContext(request))
+
+    def send_email(self, request, order_no):
+        order = Order.objects.get(order_no=order_no)
+        form = Send_email(request.POST or None, initial={'email':order.user.email})
+        if form.is_valid():
+            to = form.cleaned_data['email']
+            subject = '[Myton Automotive] '+form.cleaned_data['subject']
+            body = form.cleaned_data['body']
+            # import pdb; pdb.set_trace()
+            email = EmailMessage(subject, body, 'aijogjadab@gmail.com', [to])
+            email.content_subtype = "html"  # Main content is now text/html
+            email.send(fail_silently=False)
+            messages.success(request, "The email to \""+to+"\" for order \""+order_no+"\" was sent successfully.")
+            return HttpResponseRedirect('/admin/order/order/')
+        
+        data = {
+            'form':form,
+            'title':'Send email',
+        }
+        return render_to_response('admin/order/send_mail.html', data, context_instance=RequestContext(request))
 
     def get_urls(self):
         urls = super(OrderAdmin,self).get_urls()
-        my_urls = patterns('',(r'^invoice/(\d+)/$',self.invoice_pdf))
+        my_urls = patterns('',
+            (r'^invoice/(\d+)/$',self.invoice_pdf),
+            (r'^send_email/(\d+)/$',self.send_email)
+            )
         return my_urls + urls
 
 # Register your models here.

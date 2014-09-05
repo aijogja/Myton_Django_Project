@@ -123,15 +123,11 @@ info@mytonautomotive.com</td>
 		<tfoot>
 			<tr>
 				<td colspan="8" class="align_right">Total Weight (kg)</td>
-				<td class="align_right"></td>
+				<td class="align_right">{{order.order_delivery.weight}}</td>
 			</tr>
 			<tr>
-				<td colspan="8" class="align_right">Surcharge Total ex VAT</td>
-				<td class="align_right"></td>
-			</tr>
-			<tr>
-				<td colspan="8" class="align_right">Product Total ex VAT</td>
-				<td class="align_right"></td>
+				<td colspan="8" class="align_right">Total ex VAT</td>
+				<td class="align_right">{{order.amount|subtract:order.order_delivery.cost|subtract:order.vat|currency}}</td>
 			</tr>
 			<tr>
 				<td colspan="8" class="align_right">Delivery Service</td>
@@ -139,11 +135,11 @@ info@mytonautomotive.com</td>
 			</tr>
 			<tr>
 				<td colspan="8" class="align_right">Total VAT</td>
-				<td class="align_right"></td>
+				<td class="align_right">{% vat_value order.amount|subtract:order.order_delivery.cost|subtract:order.vat vat %}</td>
 			</tr>
 			<tr>
 				<td colspan="8" class="align_right">Total</td>
-				<td class="align_right"></td>
+				<td class="align_right">{{order.amount|currency}}</td>
 			</tr>
 		</tfoot>
 	</table>
