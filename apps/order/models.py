@@ -9,7 +9,7 @@ import random
 # Create your models here.
 
 class Order(models.Model):
-    STATUS = (('NEW','New Order'),('AWD', 'Awaiting Dispatch'),('CNL','Cancelled'),('CNF','Confirmed'))
+    STATUS = (('NEW','New Order'),('AWD', 'Awaiting Dispatch'),('CNF','Confirmed'),('SNT','Sent'),('CNL','Cancelled'))
 
     order_no = models.CharField("Order number",max_length=30, unique=True, null=True)
     user = models.ForeignKey(User,related_name='user_order', null=True)

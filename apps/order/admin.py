@@ -52,14 +52,22 @@ class OrderDeliveryInline(admin.StackedInline):
         return False
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['order_no', 'user', 'amount', 'status', 'status_message', 'order_notes', 'created_on','list_action']
+    list_display = ['order_no', 'user', 'amount', 'status', 'status_message', 'order_notes', 'created_on', 'list_action']
     list_display_links = ['order_no']
     list_filter = ['user', 'status']
     search_fields = ['order_no']
     inlines = [OrderDetailInline, OrderDeliveryInline, CommentInline]
 
+    def queryset(self, request):
+        return super(OrderAdmin, self).queryset(request).filter(deleted=False)
+
     def list_action(self, obj):
-        return '<a href="invoice/'+ str(obj.order_no) +'" target="_blank">Invoice</a> | '+'<a href="send_email/'+ str(obj.order_no) +'">Send Email</a>'
+        menu = (
+            '<a href="invoice/'+ str(obj.order_no) +'" target="_blank">Invoice</a> | '+
+            '<a href="send_email/'+ str(obj.order_no) +'">Email Customer</a> | '+
+            '<a href="delete/'+ str(obj.pk) +'">Delete</a>'
+            )
+        return menu
     list_action.short_description = "Action"
     list_action.allow_tags = True
 
@@ -88,6 +96,7 @@ class OrderAdmin(admin.ModelAdmin):
         filename = create_pdf(request, order_no)
         return HttpResponseRedirect('/static/media/'+filename)
 
+    # Email to Customer
     def send_email(self, request, order_no):
         order = Order.objects.get(order_no=order_no)
         form = Send_email(request.POST or None, initial={'email':order.user.email})
@@ -108,11 +117,21 @@ class OrderAdmin(admin.ModelAdmin):
         }
         return render_to_response('admin/order/send_mail.html', data, context_instance=RequestContext(request))
 
+    # Delete order
+    def delete_order(self,request,id):
+        order = Order.objects.get(pk=id)
+        order.deleted = True
+        order.save()
+        messages.success(request, "The order \""+order.order_no+"\" was deleted successfully.")
+        return HttpResponseRedirect('/admin/order/order/')
+
+    # Define the url
     def get_urls(self):
         urls = super(OrderAdmin,self).get_urls()
         my_urls = patterns('',
             (r'^invoice/(\d+)/$',self.invoice_pdf),
-            (r'^send_email/(\d+)/$',self.send_email)
+            (r'^send_email/(\d+)/$',self.send_email),            
+            (r'^delete/(\d+)/$',self.delete_order)
             )
         return my_urls + urls
 
