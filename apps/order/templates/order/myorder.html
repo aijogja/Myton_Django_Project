@@ -17,9 +17,9 @@
     {% if order %}
     {% for myorder in order %}
     <tr>
-        <td>{{ myorder.order_no }}</td>
+        <td><a href="/orderreview/{{ myorder.order_no }}">{{ myorder.order_no }}</a></td>
         <td>{{ myorder.created_on }}</td>
-        <td>{{ myorder.amount }}</td>
+        <td>{{ myorder.amount|currency }}</td>
         <td>{{ myorder.order_notes }}</td>
         <td>{{ myorder.get_status_display }}</td>
         <td>{{ myorder.status_message }}</td>

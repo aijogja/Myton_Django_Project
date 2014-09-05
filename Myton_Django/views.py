@@ -42,6 +42,7 @@ def add_to_cart(request, product_id):
     else:
         return HttpResponseRedirect('/')
 
+@login_required
 def mycart(request):
     cart=Cart(request)
     weight = 0
@@ -55,6 +56,7 @@ def mycart(request):
     }
     return render_to_response('cart.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
+@login_required
 def clear_cart(request):
     if request.is_ajax():
         cart = Cart(request)
@@ -63,6 +65,7 @@ def clear_cart(request):
     else:
         return HttpResponseRedirect('/')
 
+@login_required
 def update_cart(request, product_id, qty):
     if request.is_ajax():
         your_price = calculate_your_price(request, product_id)
@@ -165,7 +168,7 @@ def ua_display_good1(request):
 # return HttpResponse(render_to_string('partsearch.html', {'id_number':
 # data_received}))
 
-
+@login_required
 def search(request):
     data = {'breadcrumb': 'search'}
 

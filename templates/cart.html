@@ -26,15 +26,15 @@
                 <input type="text" class="form-control" onkeyup="change_qty({{item.product.pk}}, this.value)" value="{{ item.quantity }}">
             </td>
             <td>{{ item.product.weight }}</td>
-            <td>{{ item.surcharge }}</td>
-            <td>{{ item.unit_price }}</td>
-            <td>{{ item.total_price }}</td>
+            <td>{{ item.surcharge|currency }}</td>
+            <td>{{ item.unit_price|currency }}</td>
+            <td>{{ item.total_price|currency }}</td>
         </tr>
         {% endfor %}
         <tr>
             <td colspan="4"></td>
             <td colspan="2" class="text-right">Total ex VAT</td>
-            <td>{{ cart.summary }}</td>
+            <td>{{ cart.summary|currency }}</td>
         </tr>
         <tr>
             <td colspan="4"></td>

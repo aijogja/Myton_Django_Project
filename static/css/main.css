@@ -18,3 +18,7 @@ a.account-cart {
 .account-cart > .badge {
 	background: red	
 }
+
+.article-image {
+	margin:10px 0px;
+}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main_area %}
+
+<h3>Latest News</h3>
+
+{% for article in last_article %}
+<div class="row article-image">
+    <div class="col-md-8">
+        <h4><a href="/article/{{article.slug}}">{{ article.title }}</a></h4>        
+        {{ article.content|safe|truncatewords:"30" }}        
+    </div>
+    <div class="col-md-4"><img class="img-thumbnail" src="{{article.image_thumb.url}}"></div>
+</div>
+{% endfor %}
+
+{% endblock main_area %}

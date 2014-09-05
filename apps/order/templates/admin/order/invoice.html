@@ -112,11 +112,11 @@ info@mytonautomotive.com</td>
 				<td>{{ detail_order.product.name }}</td>
 				<td>{{ detail_order.qty }}</td>
 				<td>{{ detail_order.weight }}</td>
-				<td class="align_right">{{ detail_order.surcharge }}</td>
-				<td class="align_right">{{ detail_order.price }}</td>
-				<td class="align_right">{{ detail_order.amount }}</td>
+				<td class="align_right">{{ detail_order.surcharge|currency }}</td>
+				<td class="align_right">{{ detail_order.price|currency }}</td>
+				<td class="align_right">{{ detail_order.amount|currency }}</td>
 				<td></td>
-				<td class="align_right">{{ detail_order.amount }}</td>
+				<td class="align_right">{{ detail_order.amount|currency }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

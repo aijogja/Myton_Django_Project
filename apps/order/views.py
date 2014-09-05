@@ -2,6 +2,8 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import Context, RequestContext
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django import forms
 
 from Myton_Django.views import custom_proc
@@ -13,6 +15,7 @@ from apps.order.models import Order, OrderDetail, OrderDelivery
 from cart import Cart
 
 # Create your views here.
+@login_required
 def get_delivery(request,country):
     if request.is_ajax():
         delivery_form = DeliveryServiceForm()
@@ -30,6 +33,7 @@ def get_delivery(request,country):
     else:
         return HttpResponseRedirect('/')
 
+@login_required
 def get_detail_order(request,service):
     # if request.is_ajax():
         profile = Profile.objects.get(user__username=request.user)
@@ -47,6 +51,7 @@ def get_detail_order(request,service):
     # else:
         # return HttpResponseRedirect('/')
 
+@login_required
 def checkout(request):
     # import pdb; pdb.set_trace()
     cart=Cart(request)
@@ -56,6 +61,7 @@ def checkout(request):
     profile = Profile.objects.get(user__username=request.user)
     form = DeliveryAddress(request.POST or None, instance=profile)
     delivery_form = DeliveryServiceForm(request.POST or None)
+    tot_weight = request.session['total_weight']
 
     if form.is_valid() and delivery_form.is_valid():        
         delivery_cost = delivery_form.cleaned_data['service']
@@ -95,9 +101,11 @@ def checkout(request):
         orderdelivery.telephone = form.cleaned_data['telephone']
         orderdelivery.service = delivery_cost.title
         orderdelivery.cost = delivery_cost.cost
+        orderdelivery.weight = tot_weight
         orderdelivery.save()
         cart.clear()
-        return HttpResponseRedirect('/')
+        messages.success(request, "Your order was complete.")
+        return HttpResponseRedirect('/orderreview/'+ order.order_no)
 
     try:        
         check_band = PostageCountry.objects.get(country=profile.country)        
@@ -105,16 +113,26 @@ def checkout(request):
         request.session['vat'] = check_band.vat
     except:
         band = ''    
-    tot_weight = request.session['total_weight']    
+        
     delivery_form.fields['service'] = forms.ModelChoiceField(required=True, queryset=PostageRate.objects.all().filter(band=band,active=True,weight_start__lte=tot_weight,weight_to__gte=tot_weight), widget=forms.Select(attrs={'class': 'form-control'}))
 
     data = {'form':form,'delivery_form':delivery_form}
     return render_to_response('order/checkout.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
+@login_required
 def order_complete(request):
     return render_to_response('order_complete.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
+@login_required
 def myorder(request):
     myorder = Order.objects.filter(user=request.user)
     data = {'breadcrumb':'myorder', 'order':myorder}
     return render_to_response('order/myorder.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
+
+@login_required
+def order_review(request, ordernumber):
+    myorder = Order.objects.get(order_no=ordernumber)
+    total = myorder.amount - myorder.order_delivery.cost - myorder.vat
+    vat_percent = '%0.0f' % ((myorder.vat/total)*100)
+    data = {'breadcrumb':'myorder', 'myorder':myorder, 'vat':vat_percent}
+    return render_to_response('order/order_review.html', data, context_instance=RequestContext(request, processors=[custom_proc]))

@@ -41,7 +41,7 @@ class OrderDeliveryInline(admin.StackedInline):
 
     def get_readonly_fields(self, request, obj):
         if obj:
-            return ['country','service','cost']
+            return ['country','service','weight','cost']
         else:
             return []
 
@@ -69,6 +69,9 @@ class OrderAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False  
 
+    def has_delete_permission(self, request, obj=False):
+        return False
+
     # to auto set user on order comment, when user add comment
     def save_formset(self, request, form, formset, change):
         instances = formset.save(commit=False)
@@ -81,14 +84,20 @@ class OrderAdmin(admin.ModelAdmin):
     def invoice_pdf(self, request, order_no):
         import xhtml2pdf.pisa as pisa
         import cStringIO
+        import os
+        
         filename = '/pdfs/'+str(order_no)+'.pdf'
+        directory = os.path.join(settings.MEDIA_ROOT,'pdfs')
         file_path = settings.MEDIA_ROOT+filename
+        if not os.path.exists(directory):
+            os.mkdir(directory)
+
         img = open("static/img/mainlogo.jpg","rb")
         logo = img.read()
         logo_encode = "data:image/jpg;base64,%s" % logo.encode('base64')
 
         order = Order.objects.select_related('order_delivery').get(order_no=order_no)
-
+        import pdb; pdb.set_trace()
         data = {'order':order, 'logo':logo_encode}
         result = render_to_string('admin/order/invoice.html', data, context_instance=RequestContext(request))
         pdf = pisa.CreatePDF(cStringIO.StringIO(result.encode('UTF-8')), file(file_path, "wb"))

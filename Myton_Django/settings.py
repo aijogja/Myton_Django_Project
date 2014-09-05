@@ -41,15 +41,19 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'trade',
     'apps.customer',
     'apps.files',
     'apps.product',
     'apps.setup',
     'apps.order',
+    'apps.article',
     'cart',
     'south',
     'smart_selects',
+    'imagekit',
+    'tinymce',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,7 +91,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-DATABASES['default'] =  dj_database_url.config()
+# DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization

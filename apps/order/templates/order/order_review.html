@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block main_area %}
+
+<h3>Order Review #{{myorder.order_no}}</h3>
+<a href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-file"></span> Invoice PDF</a><br><br>
+<table class="table">
+    <thead>
+        <tr class="info">
+            <th>Part Number</th>
+            <th>Description</th>     
+            <th class="text-center col-sm-1">Quantity</th>   
+            <th>Weight</th>
+            <th>Surcharge ex VAT</th>
+            <th>Price exc VAT</th>
+            <th>Total exc VAT</th>
+            <th>VAT</th>
+            <th>Total inc VAT</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for detail_order in myorder.detail_order_data %}
+        <tr>
+            <td>{{ detail_order.product.part_number }}</td>
+            <td>{{ detail_order.product.name }}</td>
+            <td class="text-center col-sm-1">{{ detail_order.qty }}</td>            
+            <td>{{ detail_order.weight }}</td>
+            <td>{{ detail_order.surcharge|currency }}</td>
+            <td>{{ detail_order.price|currency }}</td>
+            <td>{{ detail_order.amount|currency }}</td>
+            <td>{{ vat }}%</td>
+            <td class="text-right">{% price_inc_tax detail_order.amount vat %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8" class="text-right">Total Weight (kg)</td>
+                <td class="text-right">{{myorder.order_delivery.weight}}</td>
+            </tr>
+            <tr>
+                <td colspan="8" class="text-right">Total ex VAT</td>
+                <td class="text-right">{{myorder.amount|subtract:myorder.order_delivery.cost|subtract:myorder.vat|currency}}</td>
+            </tr>
+            <tr>
+                <td colspan="8" class="text-right">Total VAT</td>
+                <td class="text-right">{% vat_value myorder.amount|subtract:myorder.order_delivery.cost|subtract:myorder.vat vat %}</td>
+            </tr>
+            <tr>
+                <td colspan="8" class="text-right">Delivery Service</td>
+                <td class="text-right">{{myorder.order_delivery.cost|currency}}</td>
+            </tr>
+            <tr>
+                <td colspan="8" class="text-right">Total Payment</td>
+                <td class="text-right">{{myorder.amount|currency}}</td>
+            </tr>
+        </tfoot>
+</table>
+{% endblock main_area %}
