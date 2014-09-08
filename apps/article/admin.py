@@ -13,7 +13,7 @@ class ArticleAdmin(admin.ModelAdmin):
     content_display.admin_order_field = 'content'
 
     def thumb_display(self, obj):
-    	return mark_safe(u'<img src="%s" />' % obj.image_thumb.url)
+    	return mark_safe(u'<img src="/static/media/%s" />' % obj.image)
     thumb_display.short_description = 'Image'
     thumb_display.admin_order_field = 'image_thumb'
     # thumb_display.allow_tags = True
