@@ -25,6 +25,7 @@ def populate_product_by_files(file):
         buy_price = calculate_buy_price(retail_price, discount_code_leter)
 
         # Save to the database
+        # print part_number
         discount = DiscountCode.objects.get(code=discount_code_leter)
         part, created = Part.objects.get_or_create(part_number=part_number)
         part.name = part_name
@@ -36,7 +37,10 @@ def populate_product_by_files(file):
 
 
 def calculate_buy_price(retail_price, discount_code_leter):
+    # try:
     discount_code = DiscountCode.objects.get(code=discount_code_leter)
+    # except:
+        # print discount_code_leter
 
     buy_price_1 = float(retail_price) / 100
     buy_price_2 = float(discount_code.discount) * buy_price_1
