@@ -72,11 +72,11 @@ class Part(models.Model):
     year = models.CharField(max_length=50, blank=True, null=True)
     weight = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
     discount_code = models.ForeignKey(DiscountCode,related_name='discount_code', null=True)
-    # supplier = ChainedForeignKey(Part, related_name='part_supplier', blank=True, null=True)
-    # quality = models.CharField(max_length=10, choices=QUALITY_CHOICE, default='GEN')
-    # height = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
-    # width = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
-    # length = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
+    supplier = ChainedForeignKey(Supplier, related_name='part_supplier', blank=True, null=True)
+    quality = models.CharField(max_length=10, choices=QUALITY_CHOICE, default='GEN', blank=True, null=True)
+    height = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
+    width = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
+    length = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
     retail_price = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     buy_price = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     surcharge = models.DecimalField(max_digits=18, decimal_places=2, null=True)
@@ -90,16 +90,16 @@ class Part(models.Model):
     def __unicode__(self):
         return self.part_number
 
-# class Supplier(models.Model):
-#     name = models.CharField(max_length=5, null=True)
-#     active = models.BooleanField(default=True)
-#     created_on = models.DateTimeField(auto_now_add=True)
-#     last_modified = models.DateTimeField(auto_now=True)
+class Supplier(models.Model):
+    name = models.CharField(max_length=5, null=True)
+    active = models.BooleanField(default=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
 
-#     class Meta:
-#         verbose_name_plural = "Supplier"
+    class Meta:
+        verbose_name_plural = "Supplier"
 
-#     def __unicode__(self):
-#         return self.name
+    def __unicode__(self):
+        return self.name
 
 
