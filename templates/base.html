@@ -21,10 +21,17 @@
 
 <div class="image_header clearfix">
     <div class="col-md-6"><img src="{{ STATIC_URL }}img/mainlogo.jpg" width="180" height="73"></div>    
+    <div class="row">
     <div class="well well-lg col-md-3 pull-right account-cart-box">
-    <a href="/my-cart" class="account-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart {% if cart.count %}<span class="badge">{{cart.count}}</span>{% endif %}</a>
-    <a href="/my-details" class="account-cart"><span class="glyphicon glyphicon-user"></span> Account</a>
+      <a href="/my-cart" class="account-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart {% if cart.count %}<span class="badge">{{cart.count}}</span>{% endif %}</a>
+      <a href="/my-details" class="account-cart"><span class="glyphicon glyphicon-user"></span> Account</a>
     </div>
+    </div>
+    <div class="row">
+    <div class="pull-right">
+      <a href="/accounts/logout" class="btn btn-link" style="margin-right:20px">Logout</a>
+    </div>    
+    </div>    
 </div>
 
 <div class="navbar navbar-inverse">
@@ -36,16 +43,13 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/about">Trade Portal</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li {% if breadcrumb == 'home' %}class="active"{% endif %}><a href="/">Home</a></li>
+              <li {% if breadcrumb == 'search' %}class="active"{% endif %}><a href="/search/">Part Seach</a></li>
               <li {% if breadcrumb == 'latest-news' %}class="active"{% endif %}><a href="/latest-news">Latest News</a></li>
-              <li {% if breadcrumb == 'myorder' %}class="active"{% endif %}><a href="/my-orders">My Orders</a></li>
-              <li {% if breadcrumb == 'search' %}class="active"{% endif %}><a href="/search/">Part Seach & Stock Check</a></li>
+              <li {% if breadcrumb == 'myorder' %}class="active"{% endif %}><a href="/my-orders">My Orders</a></li>              
               <li {% if breadcrumb == 'downloads' %}class="active"{% endif %}><a href="/downloads">Downloads</a></li>              
-              <li><a href="/accounts/logout">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

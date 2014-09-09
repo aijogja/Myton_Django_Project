@@ -3,15 +3,24 @@
 
 {% block main_area %}
 <h3>Part Number Lookup</h3>
-<form action="/search/" method="get">
+<form action="/search/" method="get" class="form-inline" role="form">
     {% csrf_token %}
-    <input type="text" name="q">
-    <input type="submit" value="Search">
+    <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Enter the part number">
+    </div>
+    <div class="form-group">
+        <input type="submit" class="form-control" name="submit" value="Search">
+    </div>
+    <!-- <input type="text" name="q">
+    <input type="submit" value="Search"> -->
 </form> 
 
 
 <div>
-    <p>{% if search_query %}Search Query was <strong>{{ search_query }}</strong>{% endif %}</p>
+
+    {% if search_query %}
+    <span class="help-block">Search Query was <strong>{{ search_query }}</strong></span>
+    {% endif %}
     <p>Results:</p>
 
 <table class="table">

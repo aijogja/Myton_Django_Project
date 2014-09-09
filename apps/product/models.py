@@ -83,4 +83,16 @@ class Part(models.Model):
     def __unicode__(self):
         return self.part_number
 
+# class Supplier(models.Model):
+#     code = models.CharField(max_length=5, null=True)
+#     discount = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+#     created_on = models.DateTimeField(auto_now_add=True)
+#     last_modified = models.DateTimeField(auto_now=True)
+
+#     class Meta:
+#         verbose_name_plural = "Discount Code"
+
+#     def __unicode__(self):
+#         return self.code
+
 

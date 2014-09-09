@@ -29,8 +29,9 @@ def custom_proc(request):
 
 @login_required
 def home(request):
-    data = {'breadcrumb': 'home'}
-    return render_to_response('base.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
+    return HttpResponseRedirect('/search')    
+    # data = {'breadcrumb': 'home'}
+    # return render_to_response('base.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
 def add_to_cart(request, product_id):
     if request.is_ajax():
