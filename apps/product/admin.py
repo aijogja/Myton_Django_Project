@@ -13,6 +13,7 @@ class PartAdmin(admin.ModelAdmin):
     list_filter = ['discount_code']
     search_fields = ['part_number']
 
+
 # Register your models here.
 admin.site.register(Car)
 admin.site.register(Model)

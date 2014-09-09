@@ -57,6 +57,8 @@ class DiscountCode(models.Model):
         return self.code
 
 class Part(models.Model):
+    QUALITY_CHOICE = (('GEN','Genuine'),('OEM', 'OEM'),('AFM','Aftermarket'),('RCD','Reconditioned'),('USE','Used'))
+
     part_number = models.CharField(max_length=30, null=True)
     name = models.CharField(max_length=255, null=True)
     supersessions = models.TextField(blank=True, null=True)
@@ -70,6 +72,11 @@ class Part(models.Model):
     year = models.CharField(max_length=50, blank=True, null=True)
     weight = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
     discount_code = models.ForeignKey(DiscountCode,related_name='discount_code', null=True)
+    # supplier = ChainedForeignKey(Part, related_name='part_supplier', blank=True, null=True)
+    # quality = models.CharField(max_length=10, choices=QUALITY_CHOICE, default='GEN')
+    # height = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
+    # width = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
+    # length = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
     retail_price = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     buy_price = models.DecimalField(max_digits=18, decimal_places=2, null=True)
     surcharge = models.DecimalField(max_digits=18, decimal_places=2, null=True)
@@ -84,15 +91,15 @@ class Part(models.Model):
         return self.part_number
 
 # class Supplier(models.Model):
-#     code = models.CharField(max_length=5, null=True)
-#     discount = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+#     name = models.CharField(max_length=5, null=True)
+#     active = models.BooleanField(default=True)
 #     created_on = models.DateTimeField(auto_now_add=True)
 #     last_modified = models.DateTimeField(auto_now=True)
 
 #     class Meta:
-#         verbose_name_plural = "Discount Code"
+#         verbose_name_plural = "Supplier"
 
 #     def __unicode__(self):
-#         return self.code
+#         return self.name
 
 
