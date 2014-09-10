@@ -10,6 +10,7 @@ class PostageRateAdmin(admin.ModelAdmin):
     list_filter = ['band', 'title', 'active']
 
 class SettingAdmin(admin.ModelAdmin):
+    actions = None
     list_display = ['title', 'value']
 
     def has_add_permission(self, request):

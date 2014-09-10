@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
+from apps.product.models import Supplier
 import uuid
 import os
 
@@ -35,7 +36,8 @@ class ProductList(models.Model):
 
     title = models.CharField(max_length=255, null=True, editable=False)
     file_upload = models.FileField(
-        verbose_name='File', upload_to=get_file_path, blank=True, null=True)
+        verbose_name='File', upload_to=get_file_path, null=True)
+    supplier = models.ForeignKey(Supplier, related_name='file_supplier', null=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):

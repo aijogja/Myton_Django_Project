@@ -3,7 +3,7 @@ from apps.files.models import Download, ProductList
 from Myton_Django.populate import populate_product_by_files
 
 class ProductListAdmin(admin.ModelAdmin):
-    list_display = ['title' ,'file_upload','created_on']
+    list_display = ['title', 'file_upload', 'supplier', 'created_on']
 
     def get_readonly_fields(self, request, obj=None):
         if obj:
@@ -14,8 +14,9 @@ class ProductListAdmin(admin.ModelAdmin):
         obj.save()  	
         url = obj.file_upload.url[1:]
         f = open(url)
+        # import pdb; pdb.set_trace()
         # Call script to populate data into db
-        populate_product_by_files(f)
+        populate_product_by_files(f, obj.supplier)
 
 # Register your models here.
 admin.site.register(Download)

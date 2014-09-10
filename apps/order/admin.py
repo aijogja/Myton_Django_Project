@@ -52,6 +52,7 @@ class OrderDeliveryInline(admin.StackedInline):
         return False
 
 class OrderAdmin(admin.ModelAdmin):
+    actions = None
     list_display = ['order_no', 'user', 'amount', 'status', 'status_message', 'order_notes', 'created_on', 'list_action']
     list_display_links = ['order_no']
     list_filter = ['user', 'status']

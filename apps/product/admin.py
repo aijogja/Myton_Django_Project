@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.product.models import Car, Model, Category, DiscountCode, Part
+from apps.product.models import Car, Model, Category, DiscountCode, Part, Supplier
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'parent']
@@ -13,6 +13,8 @@ class PartAdmin(admin.ModelAdmin):
     list_filter = ['discount_code']
     search_fields = ['part_number']
 
+class SupplierAdmin(admin.ModelAdmin):
+    list_display = ['name', 'contact', 'email', 'country', 'active', 'last_modified']
 
 # Register your models here.
 admin.site.register(Car)
@@ -20,3 +22,4 @@ admin.site.register(Model)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(DiscountCode, DiscountCodeAdmin)
 admin.site.register(Part, PartAdmin)
+admin.site.register(Supplier, SupplierAdmin)
