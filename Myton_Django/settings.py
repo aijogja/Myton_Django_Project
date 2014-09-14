@@ -95,7 +95,7 @@ DATABASES = {
         'ATOMIC_REQUESTS': False,
     }
 }
-# DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization
