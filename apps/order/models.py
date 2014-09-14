@@ -18,7 +18,7 @@ class Order(models.Model):
     status = models.CharField(max_length=10, choices=STATUS, default='NEW')
     status_message = models.TextField("Status message (customer visible)", blank=True, null=True)  
     order_notes = models.TextField(blank=True, null=True)  
-    deleted = models.BooleanField(default=False)
+    deleted = models.BooleanField(default=False, editable=False)
     created_on = models.DateTimeField("Order date", auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
@@ -35,11 +35,12 @@ class Order(models.Model):
 
     @classmethod
     def order_no_generator(cls):
-        date_str = datetime.now().strftime("%y%m%d%H%M")
-        size = 3
+        # import pdb; pdb.set_trace()
+        latest = cls.objects.all().latest('id')
+        size = 8
         chars = string.digits
         random_scring =  ''.join(random.choice(chars) for x in range(size))
-        return date_str + random_scring
+        return (str(latest.id+1) + random_scring)[:7]
 
     def detail_order_data(self):
         order = self.order_detail.all()
@@ -94,4 +95,20 @@ class OrderComment(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = "Order Comment"
+        verbose_name_plural = "Comment"
+
+class Payment(models.Model):
+    TYPE = (('WP','Worldpay'),('PP','Paypal'),('SL','Streamline'),('WPVT','WP Virtual Terminal'),('CHQ','Cheque'),('BANK','Bank Transfer'),('CASH','Cash'))
+
+    order = models.ForeignKey(Order, related_name="order_payment")
+    payment = models.CharField(max_length=10, choices=TYPE, default='BANK')
+    ref = models.CharField(max_length=255, blank=True, null=True)
+    amount = models.DecimalField(max_digits=18, decimal_places=2, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Payment"
+
+    def __unicode__(self):
+        return self.order

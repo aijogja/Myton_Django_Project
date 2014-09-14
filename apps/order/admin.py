@@ -7,14 +7,16 @@ from django.template import Context, RequestContext
 from django.conf.urls import patterns, include, url
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.contrib import messages
+from django.utils.safestring import mark_safe
 from Myton_Django.views import custom_proc, create_pdf
-from apps.order.models import Order, OrderDetail, OrderDelivery, OrderComment
+from apps.order.models import Order, OrderDetail, OrderDelivery, OrderComment, Payment
 from apps.order.forms import Send_email
 
-class OrderDetailInline(admin.StackedInline):
+class OrderDetailInline(admin.TabularInline):
     model = OrderDetail
     extra = 1
     max_num=0
+    classes = ('grp-collapse',)
 
     def get_readonly_fields(self, request, obj):
         if obj:
@@ -40,6 +42,7 @@ class CommentInline(admin.TabularInline):
     
 class OrderDeliveryInline(admin.StackedInline):
     model = OrderDelivery
+    inline_classes = ('grp-collapse grp-open',)
     extra = 1
 
     def get_readonly_fields(self, request, obj):
@@ -51,13 +54,36 @@ class OrderDeliveryInline(admin.StackedInline):
     def has_delete_permission(self, request, obj):
         return False
 
+class PaymentInline(admin.TabularInline):
+    model = Payment
+    classes = ('grp-collapse',)
+    inline_classes = ('grp-collapse grp-open',)
+    extra = 1
+
+    def get_readonly_fields(self, request, obj):
+        if obj:
+            return ['last_modified']
+        else:
+            return []
+
 class OrderAdmin(admin.ModelAdmin):
     actions = None
     list_display = ['order_no', 'user', 'amount', 'status', 'status_message', 'order_notes', 'created_on', 'list_action']
     list_display_links = ['order_no']
     list_filter = ['user', 'status']
     search_fields = ['order_no']
-    inlines = [OrderDetailInline, OrderDeliveryInline, CommentInline]
+    # inlines = [PaymentInline, OrderDetailInline, OrderDeliveryInline, CommentInline]
+    inlines = [PaymentInline, OrderDetailInline]
+    fieldsets = (
+        ('Total', {
+            'classes':('grp-collapse',),
+            'fields':('amount','vat')
+            }),
+        ('Status', {
+            'classes':('grp-collapse',),
+            'fields':('status','status_message','order_notes')
+            }),
+        )
 
     def queryset(self, request):
         return super(OrderAdmin, self).queryset(request).filter(deleted=False)
@@ -71,6 +97,14 @@ class OrderAdmin(admin.ModelAdmin):
         return menu
     list_action.short_description = "Action"
     list_action.allow_tags = True
+
+    def change_view(self, request, obj_id, form_url='', extra_content=None):
+        # import pdb; pdb.set_trace()
+        order = Order.objects.get(pk=obj_id)
+        extra_content = extra_content or {}
+        extra_content['view_pdf'] = mark_safe(u'<a href="../invoice/%s" target="_blank">View PDF</a>' % order.order_no)
+        extra_content['order'] = order
+        return super(OrderAdmin, self).change_view(request, obj_id, form_url, extra_content)
 
 
     def get_readonly_fields(self, request, obj):
@@ -90,6 +124,8 @@ class OrderAdmin(admin.ModelAdmin):
         for instance in instances:
             if isinstance(instance,OrderComment):
                 instance.user = request.user
+                instance.save()
+            else:
                 instance.save()
 
     # Invoice PDF preview

@@ -32,7 +32,7 @@ def populate_product_by_files(file, supplier=None):
         # Calculate buy price
         buy_price = calculate_buy_price(retail_price, discount)
         # Save to the database
-        # print part_number
+        print str(count) + ' - ' + part_number
         part, created = Part.objects.get_or_create(part_number=part_number)
         part.name = part_name
         part.retail_price = retail_price
