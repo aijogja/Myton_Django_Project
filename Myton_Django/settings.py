@@ -65,7 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.transaction.TransactionMiddleware',
+    # 'django.middleware.transaction.TransactionMiddleware',
 )
 
 ROOT_URLCONF = 'Myton_Django.urls'
@@ -92,7 +92,6 @@ DATABASES = {
         'PASSWORD': 'aijogja',
         'HOST': 'localhost',
         'PORT': '',
-        'ATOMIC_REQUESTS': False,
     }
 }
 # DATABASES['default'] =  dj_database_url.config()
