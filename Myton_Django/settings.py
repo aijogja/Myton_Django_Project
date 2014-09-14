@@ -92,7 +92,7 @@ DATABASES = {
         'PASSWORD': 'aijogja',
         'HOST': 'localhost',
         'PORT': '',
-        'ATOMIC_REQUESTS': False,
+        # 'ATOMIC_REQUESTS': False,
     }
 }
 DATABASES['default'] =  dj_database_url.config()
