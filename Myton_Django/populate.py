@@ -1,5 +1,7 @@
 from apps.product.models import DiscountCode, Part
+# from django.db import transaction
 
+# @transaction.commit_manually
 def populate_product_by_files(file, supplier=None):
     count = 0
     Part.objects.filter(supplier=supplier).update(deleted=True)
@@ -43,14 +45,10 @@ def populate_product_by_files(file, supplier=None):
         if supplier :
             part.supplier = supplier
         part.save()
+    # transaction.commit()
 
 
 def calculate_buy_price(retail_price, discount_code):
-    # try:
-    # discount_code = DiscountCode.objects.get(code=discount_code_leter)
-    # except:
-        # print discount_code_leter
-
     buy_price_1 = float(retail_price) / 100
     buy_price_2 = float(discount_code.discount) * buy_price_1
     buy_price = float(retail_price) - buy_price_2

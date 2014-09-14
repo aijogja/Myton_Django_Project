@@ -54,6 +54,8 @@ INSTALLED_APPS = (
     'smart_selects',
     'imagekit',
     'tinymce',
+    # 'debug_toolbar.apps.DebugToolbarConfig',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,6 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
 )
 
 ROOT_URLCONF = 'Myton_Django.urls'
@@ -89,9 +92,10 @@ DATABASES = {
         'PASSWORD': 'aijogja',
         'HOST': 'localhost',
         'PORT': '',
+        'ATOMIC_REQUESTS': False,
     }
 }
-# DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization
