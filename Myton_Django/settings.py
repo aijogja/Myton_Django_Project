@@ -55,7 +55,7 @@ INSTALLED_APPS = (
     'imagekit',
     'tinymce',
     # 'debug_toolbar.apps.DebugToolbarConfig',
-    'debug_toolbar',
+    # 'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -95,7 +95,7 @@ DATABASES = {
         'ATOMIC_REQUESTS': False,
     }
 }
-DATABASES['default'] =  dj_database_url.config()
+# DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization
