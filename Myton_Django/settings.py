@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'nx(e7t4$j#8+%b$ivs=3-x^+pac)g%1^vn9s#b1!rgsjzg$dz8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -65,7 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.transaction.TransactionMiddleware',
+    # 'django.middleware.transaction.TransactionMiddleware',
 )
 
 ROOT_URLCONF = 'Myton_Django.urls'
@@ -92,10 +92,9 @@ DATABASES = {
         'PASSWORD': 'aijogja',
         'HOST': 'localhost',
         'PORT': '',
-        # 'ATOMIC_REQUESTS': False,
     }
 }
-# DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization
