@@ -1,10 +1,12 @@
 from apps.product.models import DiscountCode, Part
+from datetime import datetime
 # from django.db import transaction
 
 # @transaction.commit_manually
 def populate_product_by_files(file, supplier=None):
     count = 0
     Part.objects.filter(supplier=supplier).update(deleted=True)
+    print datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     for line in file.xreadlines():
         line = line.strip()
         line = line.replace(" ", "")
@@ -34,7 +36,7 @@ def populate_product_by_files(file, supplier=None):
         # Calculate buy price
         buy_price = calculate_buy_price(retail_price, discount)
         # Save to the database
-        print str(count) + ' - ' + part_number
+        # print str(count) + ' - ' + part_number
         part, created = Part.objects.get_or_create(part_number=part_number)
         part.name = part_name
         part.retail_price = retail_price
@@ -46,6 +48,7 @@ def populate_product_by_files(file, supplier=None):
             part.supplier = supplier
         part.save()
     # transaction.commit()
+    print datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
 def calculate_buy_price(retail_price, discount_code):

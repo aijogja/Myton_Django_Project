@@ -38,6 +38,7 @@ class ProductList(models.Model):
     file_upload = models.FileField(
         verbose_name='File', upload_to=get_file_path, null=True)
     supplier = models.ForeignKey(Supplier, related_name='file_supplier', null=True)
+    synced = models.BooleanField(default=False, editable=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
