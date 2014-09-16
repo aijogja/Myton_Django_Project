@@ -9,8 +9,8 @@ class DiscountCodeAdmin(admin.ModelAdmin):
     ordering = ['code']
 
 class PartAdmin(admin.ModelAdmin):
-    list_display = ['part_number', 'name', 'discount_code', 'weight', 'retail_price', 'buy_price', 'surcharge']
-    list_filter = ['discount_code']
+    list_display = ['part_number', 'name', 'discount_code', 'weight', 'retail_price', 'buy_price', 'surcharge', 'supplier', 'deleted', 'last_modified']
+    list_filter = ['discount_code', 'supplier', 'deleted']
     search_fields = ['part_number']
 
 class SupplierAdmin(admin.ModelAdmin):

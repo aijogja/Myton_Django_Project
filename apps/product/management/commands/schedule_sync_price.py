@@ -12,7 +12,8 @@ class Command(BaseCommand):
 			populate_product_by_files(f, product.supplier)
 			product.synced = True
 			product.save()
-		except:
+		except Exception as e:
+			print '%s (%s)' % (e.message, type(e))
 			pass
 
 		
