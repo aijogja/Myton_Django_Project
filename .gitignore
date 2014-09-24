@@ -1,4 +1,4 @@
 *.pyc
 static/media
-/Myton_Django/settings.py
+Myton_Django/settings.py
 
