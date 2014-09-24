@@ -69,7 +69,8 @@ class UpdateProfile(forms.ModelForm):
             'postcode': forms.TextInput(attrs={'class': 'form-control'}),
             'country': forms.Select(attrs={'class': 'form-control'}),
             'telephone': forms.TextInput(attrs={'class': 'form-control'}),
-            'mobile': forms.TextInput(attrs={'class': 'form-control'}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control'}),            
+            'vat_number': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 class DeliveryAddress(forms.ModelForm):
