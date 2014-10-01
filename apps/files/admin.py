@@ -14,11 +14,11 @@ class ProductListAdmin(admin.ModelAdmin):
 
 
 class CronProductPrice(CronJobBase):
-    RUN_AT_TIMES = ['14:30']
-    #RUN_EVERY_MINS = 1
+    #RUN_AT_TIMES = ['1:00']
+    RUN_EVERY_MINS = 3
 
-    schedule = Schedule(run_at_times=RUN_AT_TIMES)
-    #schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    #schedule = Schedule(run_at_times=RUN_AT_TIMES)
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
     code = 'files.cron_product_price'
 
     def do(self):
