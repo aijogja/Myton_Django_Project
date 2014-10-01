@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'smart_selects',
     'imagekit',
     'tinymce',
+    'django_cron',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -92,7 +93,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-DATABASES['default'] =  dj_database_url.config()
+#DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization
@@ -170,3 +171,7 @@ GRAPPELLI_ADMIN_TITLE = 'Myton Automotive'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CRON_CLASSES = [
+    "apps.files.admin.CronProductPrice",
+]
