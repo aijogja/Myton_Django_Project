@@ -2,7 +2,6 @@ from django.contrib import admin
 from apps.files.models import Download, ProductList
 from Myton_Django.populate import populate_product_by_files
 
-
 class ProductListAdmin(admin.ModelAdmin):
     list_display = ['title', 'file_upload', 'supplier', 'synced', 'created_on']
 

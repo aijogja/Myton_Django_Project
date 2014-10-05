@@ -8,6 +8,7 @@ import os
 class Command(BaseCommand):
 	def handle(self, *args, **options):
 		try:
+
 			product = ProductList.objects.filter(synced=False).latest('created_on')	
 			fullpath = os.path.join(settings.MEDIA_ROOT,str(product.file_upload))		
 			f = open(fullpath)
