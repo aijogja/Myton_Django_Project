@@ -1,0 +1,71 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myton Automotive Trade Portal</title>
+<link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="{{ STATIC_URL }}css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+<link href="{{ STATIC_URL }}css/main.css" rel="stylesheet" type="text/css">
+
+
+  <!-- HTML5 shim for IE backwards compatibility -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<div class="container">
+<body class ="body">
+
+<div class="image_header">
+    <img src="{{ STATIC_URL }}img/mainlogo.jpg" width="180" height="73">
+</div>
+
+
+
+
+<div class="navbar navbar-inverse">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/about">Staff Portal</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/trade">Database</a></li>
+              <li><a href="/orders">Orders</a></li>
+              <li><a href="/my-orders">Helpers</a></li>
+              <li><a href="/site-admin">Site Admin</a></li>
+              <li><a href="/my-details">My Details</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+<div>
+    {% block main_area %}
+
+    {% endblock main_area %}
+</div>
+
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+<div class="well well-sm">{% include "footer.html"%}</div>
+
+<div>
+    {% block side_bar %}
+
+    {% endblock side_bar %}
+</div>
+
+</body>
+</div>
+</html>

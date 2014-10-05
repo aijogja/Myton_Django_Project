@@ -1,0 +1,24 @@
+.image_header{
+	padding: 10px
+}
+.alert-validation {
+	margin-top: 10px;	
+	margin-bottom: 0px;
+	padding: 7px;
+}
+.account-cart-box {
+	background: #233357
+}
+a.account-cart {
+	padding: 10px;
+	text-decoration: none;
+	color: #fff;
+	font-size: 18px;
+}
+.account-cart > .badge {
+	background: red	
+}
+
+.article-image {
+	margin:10px 0px;
+}

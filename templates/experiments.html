@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block main_area %}
+
+<h3>Experiments Page</h3>
+<div>
+<p>
+
+    <form action="/search/" method="post">{% csrf_token %}
+    <label for="your_name">Search: </label>
+    <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+    <input type="submit" value="OK">
+</form>
+</div>
+
+<p>
+    <table class="table">
+    <thead>
+    <tr>
+        <td>Database ID</td>
+        <td>Part Number</td>
+        <td>Description</td>
+        <td>RRP Price</td>
+        <td>Issued In</td>
+        <td>Surcharge</td>
+        <td>Your Buy Price</td>
+    </tr>
+    </thead>
+    </table>
+
+   <tbody>
+    <tr>
+       <td>{{ id_number }}</td>
+    </tr>
+
+   </tbody>
+</p>
+
+
+
+</p>
+
+
+</div>
+{% endblock main_area %}

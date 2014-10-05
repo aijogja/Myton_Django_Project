@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+
+{% block main_area %}
+<h3>My Cart</h3>
+
+<div>
+<form class="form-horizontal" role="form">
+<table class="table">
+    <tr>
+        <th>Part Number</th>
+        <th>Description</th>     
+        <th class="text-center col-sm-1">Quantity</th>   
+        <th>Weight</th>
+        <th>Surcharge ex VAT</th>
+        <th>Price ex VAT</th>
+        <th>Total Price ex VAT</th>
+    </tr>
+    
+    {% if cart.count > 0 %}
+        {% for item in cart %}
+        <tr>
+            <td>{{ item.product.part_number }}</td>
+            <td>{{ item.product.name }}</td>
+            <td class="text-center">
+                <input type="text" class="form-control" onkeyup="change_qty({{item.product.pk}}, this.value)" value="{{ item.quantity }}">
+            </td>
+            <td>{{ item.product.weight }}</td>
+            <td>{{ item.surcharge|currency }}</td>
+            <td>{{ item.unit_price|currency }}</td>
+            <td>{{ item.total_price|currency }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="2" class="text-right">Total ex VAT</td>
+            <td>{{ cart.summary|currency }}</td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="2" class="text-right">Total Weight (Kg)</td>
+            <td>{{request.session.total_weight}}</td>
+        </tr>
+    {% else %}
+        <tr><td colspan="7" class="text-center">Cart Empty</td></tr>
+    {% endif %}
+
+</table>
+</form>
+</div>
+{% if cart.count > 0 %}
+<div class="pull-right">
+    <a href="/search" class="btn btn-default">Continue Shopping</a>
+    <a href="/clear-cart" onclick="clear_cart(); return false;" class="btn btn-default">Clear Cart</a>
+    <a href="/checkout" class="btn btn-success">Checkout</a>
+</div>
+{% endif %}
+<div class="clearfix"></div>
+
+{% endblock main_area %}

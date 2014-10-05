@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block main_area %}
+<h3>Checkout</h3>
+<form action="" method="post" class="form-horizontal" role="form">
+{% csrf_token %}
+<div class="row">
+  <div class="col-md-6">
+  	<h4>1. Confirm/change delivery address</h4>
+  	{% for field in form.visible_fields %}
+	<div class="form-group">          
+		<label class="col-sm-4 control-label">{{ field.label }}</label>
+		<div class="col-sm-8">
+			{{ field }}   
+			{% if field.errors %}
+			{% for error in field.errors %}
+			<div class="alert alert-danger alert-validation">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			{{ error|escape }}
+			</div>
+			{% endfor %}
+			{% endif %} 
+		</div>            
+	</div>
+	{% endfor %}
+  </div>
+  <div class="col-md-6">
+  	<h4>2. Select a delivery service</h4>
+  	<div id="delivery_service">
+  	{% for field_delivery in delivery_form.visible_fields %}
+	<div class="form-group">          
+		<div class="col-sm-12">
+			{{ field_delivery }}   
+			{% if field_delivery.errors %}
+			{% for error in field_delivery.errors %}
+			<div class="alert alert-danger alert-validation">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			{{ error|escape }}
+			</div>
+			{% endfor %}
+			{% endif %} 
+		</div>            
+	</div>
+	{% endfor %}
+	</div>
+  	<br>
+  	<h4>3. Delivery Notes</h4>
+  	<div class="form-group">          
+		<div class="col-sm-12">
+		<textarea name="notes" class="form-control" rows="4"></textarea>
+		</div>            
+	</div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">  	
+	<div id="order_detail">
+		<div class="form-group pull-right">          
+			<div class="col-sm-12">
+			<span class="btn btn-success" disabled="disabled">Continue</span>
+		</div>
+	</div>  	  	
+  </div>
+</div>	
+</form>
+{% endblock main_area %}

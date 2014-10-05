@@ -1,0 +1,1 @@
+INSERT INTO setup_setting (title, slug, value, created_on, last_modified) VALUES ('VAT (%)','vat','20',NOW(),NOW());

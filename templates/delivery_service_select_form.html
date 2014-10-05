@@ -1,0 +1,15 @@
+{% for field_delivery in delivery_form.visible_fields %}
+<div class="form-group">          
+	<div class="col-sm-12" id="delivery_service">
+		{{ field_delivery }}   
+		{% if field_delivery.errors %}
+		{% for error in field_delivery.errors %}
+		<div class="alert alert-danger alert-validation">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		{{ error|escape }}
+		</div>
+		{% endfor %}
+		{% endif %} 
+	</div>            
+</div>
+{% endfor %}

@@ -1,0 +1,40 @@
+{% extends "login.html" %}
+
+{% block content %}
+
+<div class="container">
+<div class="panel panel-default" style="max-width: 330px; margin: 50px auto;">
+<div class="panel-heading">
+<h3 class="panel-title">Login</h3>
+</div>
+<div class="panel-body">
+<form action="" method="post" class="form-horizontal form-signin" role="form">
+{% csrf_token %}
+{% for field in form.visible_fields %}
+    <div class="form-group">
+        <label class="col-sm-4 control-label">{{ field.label }}</label>
+        <div class="col-sm-8">
+        {{ field }}
+        {% if field.errors %}
+            {% for error in field.errors %}
+              <div class="alert alert-danger alert-validation">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ error|escape }}
+              </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+        <input type="submit" name="submit" class="btn btn-primary" value="Login" />
+        </div>
+    </div>
+</form>
+<a href="/accounts/register/" class="btn btn-link pull-right">Don't have account? Register here.</a>
+</div>
+</div>
+</div>
+
+{% endblock %}

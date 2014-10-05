@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block side_bar %}
+<ul>
+    <li><a href="/trade/all">Cancek</a></li>
+</ul>
+
+{% endblock %}
+
+{% block main_area %}
+
+<form action="/trade/create/" method="post">{% csrf_token %}
+<ul>
+    {{ form.as_ul }}
+</ul>
+
+<input type="submit" name="submit" value="Create Article">
+</form>
+
+{% endblock %}

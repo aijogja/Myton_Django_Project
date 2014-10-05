@@ -1,0 +1,147 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myton Automotive Trade Portal</title>
+<link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="{{ STATIC_URL }}css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+<link href="{{ STATIC_URL }}css/main.css" rel="stylesheet" type="text/css">
+
+
+  <!-- HTML5 shim for IE backwards compatibility -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<div class="container">
+<body class ="body">
+
+<div class="image_header clearfix">
+    <div class="col-md-6"><img src="{{ STATIC_URL }}img/mainlogo.jpg" width="180" height="73"></div>    
+    <div class="row">
+    <div class="well well-lg col-md-3 pull-right account-cart-box">
+      <a href="/my-cart" class="account-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart {% if cart.count %}<span class="badge">{{cart.count}}</span>{% endif %}</a>
+      <a href="/my-details" class="account-cart"><span class="glyphicon glyphicon-user"></span> Account</a>
+    </div>
+    </div>
+    <div class="row">
+    <div class="pull-right">
+      <a href="/accounts/logout" class="btn btn-link" style="margin-right:0px">Logout</a>
+    </div>    
+    </div>    
+</div>
+
+<div class="navbar navbar-inverse">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li {% if breadcrumb == 'search' %}class="active"{% endif %}><a href="/search/">Part Seach</a></li>
+              <li {% if breadcrumb == 'latest-news' %}class="active"{% endif %}><a href="/latest-news">Latest News</a></li>
+              <li {% if breadcrumb == 'myorder' %}class="active"{% endif %}><a href="/my-orders">My Orders</a></li>              
+              <li {% if breadcrumb == 'downloads' %}class="active"{% endif %}><a href="/downloads">Downloads</a></li>              
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+<div>
+{% if messages %}
+    {% for message in messages %}
+    <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+
+    {% block main_area %}
+
+    {% endblock main_area %}
+</div>
+
+<div class="well well-sm" style="margin-top:20px">{% include "footer.html"%}</div>
+
+<div>
+    {% block side_bar %}
+
+    {% endblock side_bar %}
+</div>
+
+<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function(){  
+  $('#country_delivery').change(function(){ 
+    $('#delivery_service').html('loading');
+    $('#order_detail').html('<div class="form-group pull-right"><div class="col-sm-12"><span class="btn btn-success" disabled="disabled">Continue</span></div>');
+    country = $(this).val();
+    $.ajax ({
+      url: '/get_delivery/'+ country,
+      type: "GET",
+      success: function(msg){
+        // alert(msg);
+        $('#delivery_service').html(msg);
+      },
+    });
+  });
+
+  $('#id_service').live('change',function(){ 
+    var service = $(this).val();
+    $('#order_detail').html('loading');
+    $.ajax ({
+      url: '/get_detail_order/'+service,
+      type: "GET",
+      success: function(msg){
+        $('#order_detail').html(msg);
+      },
+    });
+  });
+});
+
+function addtocart(url){
+  $.ajax ({
+    url: url ,
+    type: "GET",
+    success: function(msg){
+      //alert(msg); 
+      window.location.href = '/my-cart';
+    },
+  });
+}
+
+function clear_cart(){
+  $.ajax ({
+    url: '/clear-cart' ,
+    type: "GET",
+    success: function(msg){
+      alert(msg); 
+      window.location.href = '/my-cart';
+    },
+  });
+}
+function change_qty(id,val){
+  $.ajax ({
+    url: '/updatecart/'+id+'/'+val ,
+    type: "GET",
+    success: function(msg){
+      window.location.href = '/my-cart';
+    },
+  });
+}
+
+</script>
+</body>
+</div>
+</html>

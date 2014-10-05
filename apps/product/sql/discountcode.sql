@@ -1,0 +1,21 @@
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('A','0.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('B','0.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('C','2.50',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('D','5.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('E','14.50',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('F','10.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('G','13.50',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('H','16.50',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('I','16.50',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('J','19.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('K','19.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('L','12.50',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('M','22.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('N','27.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('O','20.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('P','28.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('U','32.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('V','0.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('W','38.00',NOW(),NOW());
+INSERT INTO product_discountcode (code, discount, created_on, last_modified) VALUES ('Z','0.00',NOW(),NOW());
+

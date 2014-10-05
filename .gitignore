@@ -1,0 +1,6 @@
+*.pyc
+static/media/**
+static/media/*
+static/media/*.*
+Myton_Django/settings.py
+

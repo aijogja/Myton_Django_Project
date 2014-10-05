@@ -1,0 +1,186 @@
+{% extends "admin/change_form.html" %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <style type="text/css">
+    .anu {}
+    </style>
+{% endblock %}
+
+{% load url from future %}
+{% load admin_static i18n admin_modify admin_urls grp_tags %}
+
+{% block content %}
+	<ul class="grp-object-tools" style="margin-right:100px">
+	    <li>{{view_pdf}}</li>
+	</ul>
+	<div class="grp-float-left" style="width:35%">
+		<h2 class="">Correspondence</h2>
+		<fieldset class="grp-module" style="min-width:450px;">
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Email</div>
+					<div class="c-2">{{order.user.email}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">First Name</div>
+					<div class="c-2">{{order.user.profile.first_name}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Last Name</div>
+					<div class="c-2">{{order.user.profile.last_name}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Business</div>
+					<div class="c-2">{{order.user.profile.business_name}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Address</div>
+					<div class="c-2">{{order.user.profile.address_line1}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Address 2</div>
+					<div class="c-2">{{order.user.profile.address_line2}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Town</div>
+					<div class="c-2">{{order.user.profile.city}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">State</div>
+					<div class="c-2">{{order.user.profile.state}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">PostCode</div>
+					<div class="c-2">{{order.user.profile.postcode}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">County</div>
+					<div class="c-2">{{order.user.profile.country.name}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Telephone</div>
+					<div class="c-2">{{order.user.profile.telephone}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Mobile</div>
+					<div class="c-2">{{order.user.profile.mobile}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">HowHear</div>
+					<div class="c-2"></div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div class="grp-float-right" style="width:35%">
+		<h2 class="grp-collapse-handler">Delivery</h2>
+		<fieldset class="grp-module" style="min-width:450px;">
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Status</div>
+					<div class="c-2">{{order.get_status_display}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">First Name</div>
+					<div class="c-2">{{order.order_delivery.first_name}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Last Name</div>
+					<div class="c-2">{{order.order_delivery.last_name}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Business</div>
+					<div class="c-2">{{order.order_delivery.business_name}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Address</div>
+					<div class="c-2">{{order.order_delivery.address_line1}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Address 2</div>
+					<div class="c-2">{{order.order_delivery.address_line2}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Town</div>
+					<div class="c-2">{{order.order_delivery.city}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">State</div>
+					<div class="c-2">{{order.order_delivery.state}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">PostCode</div>
+					<div class="c-2">{{order.order_delivery.postcode}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">County</div>
+					<div class="c-2">{{order.order_delivery.country.name}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Instructions</div>
+					<div class="c-2">{{order.order_notes}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">OrderDate</div>
+					<div class="c-2">{{order.created_on|date:"Y-m-d H:i"}}</div>
+				</div>
+			</div>
+			<div class="grp-row grp-cells-1">
+				<div class="l-2c-fluid l-d-4">
+					<div class="c-1">Postage</div>
+					<div class="c-2">{{order.order_delivery.service}}</div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div style="clear:both"></div>
+	{{block.super}}
+	
+{% endblock %}

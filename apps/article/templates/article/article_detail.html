@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block main_area %}
+
+<h3>{{ article.title }}</h3>
+<div class="article-image"><img src="{{ STATIC_URL }}media/{{article.image}}" width="100%"></div>
+{{ article.content|safe }}
+
+{% endblock main_area %}
