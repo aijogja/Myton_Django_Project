@@ -8,45 +8,48 @@ def populate_product_by_files(file, supplier=None):
     Part.objects.filter(supplier=supplier).update(deleted=True)
     print datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     for line in file.xreadlines():
-        line = line.strip()
-        line = line.replace(" ", "")
-        part_info_array = line.split(",")
-
-        part_number = part_info_array[0]
-        part_name = part_info_array[1]
-        retail_price = part_info_array[2]
-        quantity_issued_in = part_info_array[3]
-        discount_code = part_info_array[4]
-        surcharge = part_info_array[6]
-
-        if int(quantity_issued_in) > 1:
-            retail_price = float(quantity_issued_in) * float(retail_price)
-
-        count = count + 1
-        if discount_code:
-            discount_code_leter = discount_code[1]
-        else:
-            discount_code_leter = 'A'
-
         try:
-            discount = DiscountCode.objects.get(code=discount_code_leter)
-        except:
-            discount = DiscountCode.objects.get(code='A')
+            line = line.strip()
+            line = line.replace(" ", "")
+            part_info_array = line.split(",")
 
-        # Calculate buy price
-        buy_price = calculate_buy_price(retail_price, discount)
-        # Save to the database
-        # print str(count) + ' - ' + part_number
-        part, created = Part.objects.get_or_create(part_number=part_number)
-        part.name = part_name
-        part.retail_price = retail_price
-        part.buy_price = buy_price
-        part.surcharge = surcharge
-        part.discount_code = discount
-        part.deleted = False
-        if supplier :
-            part.supplier = supplier
-        part.save()
+            part_number = part_info_array[0]
+            part_name = part_info_array[1]
+            retail_price = part_info_array[2]
+            quantity_issued_in = part_info_array[3]
+            discount_code = part_info_array[4]
+            surcharge = part_info_array[6]
+
+            if int(quantity_issued_in) > 1:
+                retail_price = float(quantity_issued_in) * float(retail_price)
+
+            count = count + 1
+            if discount_code:
+                discount_code_leter = discount_code[1]
+            else:
+                discount_code_leter = 'A'
+
+            try:
+                discount = DiscountCode.objects.get(code=discount_code_leter)
+            except:
+                discount = DiscountCode.objects.get(code='A')
+
+            # Calculate buy price
+            buy_price = calculate_buy_price(retail_price, discount)
+            # Save to the database
+            # print str(count) + ' - ' + part_number
+            part, created = Part.objects.get_or_create(part_number=part_number)
+            part.name = part_name
+            part.retail_price = retail_price
+            part.buy_price = buy_price
+            part.surcharge = surcharge
+            part.discount_code = discount
+            part.deleted = False
+            if supplier :
+                part.supplier = supplier
+            part.save()
+        except:
+            pass
     # transaction.commit()
     print datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 

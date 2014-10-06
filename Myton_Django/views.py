@@ -260,7 +260,7 @@ def create_pdf(request, order_no):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    img = open("static/img/mainlogo.jpg","rb")
+    img = open(os.path.join(settings.BASE_DIR,"static/img/mainlogo.jpg"),"rb")
     logo = img.read()
     logo_encode = "data:image/jpg;base64,%s" % logo.encode('base64')
 
