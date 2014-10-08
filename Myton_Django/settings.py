@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'smart_selects',
     'imagekit',
     'tinymce',
-    'django_cron',
+    #'django_cron',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,6 +91,7 @@ DATABASES = {
         'PASSWORD': 'aijogja',
         'HOST': 'localhost',
         'PORT': '',
+        'OPTIONS': {'autocommit':True}
     }
 }
 #DATABASES['default'] =  dj_database_url.config()
@@ -172,6 +173,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-CRON_CLASSES = [
-    "apps.files.admin.CronProductPrice",
-]
+# CRON_CLASSES = [
+#     "apps.files.admin.CronProductPrice",
+# ]
