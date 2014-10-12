@@ -8,13 +8,14 @@ import os
 class Command(BaseCommand):
 	def handle(self, *args, **options):
 		try:
-			product = ProductList.objects.filter(synced=False).earliest('created_on')	
-			fullpath = os.path.join(settings.MEDIA_ROOT,str(product.file_upload))		
-			f = open(fullpath)
-			#import pdb; pdb.set_trace() 
-			populate_product_by_files(f, product.supplier)
-			product.synced = True
-			product.save()
+			productlist = ProductList.objects.filter(synced=False)
+			for product in productlist:
+				fullpath = os.path.join(settings.MEDIA_ROOT,str(product.file_upload))		
+				f = open(fullpath)
+				#import pdb; pdb.set_trace() 
+				populate_product_by_files(f, product.supplier)
+				product.synced = True
+				product.save()
 		except Exception as e:
 			print '%s (%s)' % (e.message, type(e))
 			pass
