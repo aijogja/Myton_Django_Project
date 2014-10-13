@@ -8,7 +8,7 @@ import os
 class Command(BaseCommand):
 	def handle(self, *args, **options):
 		try:
-			productlist = ProductList.objects.filter(synced=False)
+			productlist = ProductList.objects.filter(synced=False)[:1]
 			for product in productlist:
 				fullpath = os.path.join(settings.MEDIA_ROOT,str(product.file_upload))		
 				f = open(fullpath)
