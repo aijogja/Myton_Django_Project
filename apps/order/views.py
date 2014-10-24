@@ -125,7 +125,7 @@ def order_complete(request):
 
 @login_required
 def myorder(request):
-    myorder = Order.objects.filter(user=request.user)
+    myorder = Order.objects.filter(user=request.user,deleted=False)
     data = {'breadcrumb':'myorder', 'order':myorder}
     return render_to_response('order/myorder.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 

@@ -10,13 +10,18 @@
 	margin-top: 10px;
 }
 #order_table {
-	width: 100%;
-	border: 1px solid #000;
-	border-collapse: collapse;
+	border-collapse: separate;
+	border-spacing: 3px;
+	display: block;
 }
 #order_table th, #order_table td{
-	border: 1px solid #000;
+	border: 1px solid #d1d0ce;
 	padding: 3px;
+	padding-top: 6px;
+	display: block;
+}
+#order_table td {	
+	padding: 3px 2px 0px 2px;
 }
 .align_right {
 	text-align: right;
@@ -29,26 +34,33 @@
 	<table>
 		<tr>
 			<td><img src="{{logo}}" width="180" height="73"></td>
-			<td>Unit 13
-Neilston Street Business Centre
-LEAMINGTON SPA
-CV31 2AZ
-United Kingdom
-www.mytonautomotive.com
-info@mytonautomotive.com</td>
-			<td><p><b>Order Number:</b> {{order.order_no}}</p>
-		<p><b>Date Time:</b> {{order.created_on|date:"d/m/Y H:i"}}</p></td>
+			<td>
+				Unit 13<br>
+				Neilston Street Business Centre<br>
+				LEAMINGTON SPA<br>
+				CV31 2AZ<br>
+				United Kingdom<br>
+				www.mytonautomotive.com<br>
+				info@mytonautomotive.com
+			</td>
+			<td valign="top">
+				<b>Order Number:</b> {{order.order_no}}<br>
+				<b>Invoice Date and Time:</b> {{order.created_on|date:"d/m/Y H:i"}}
+			</td>
 		</tr>
 	</table>	
+</div>
+<div class="top">
+	VAT Number : {{order.user.profile.vat_number}}
 </div>
 <div class="address">
 	<table width="100%">
 		<tr>
 			<td width="50%">
-				<h4>Invoice to</h4>				
+				<h4>Invoice to</h4>
 			</td>
 			<td width="50%" class="align_right">
-				<h4>Deliver to</h4>					
+				<h4>Deliver to</h4>			
 			</td>
 		</tr>
 		<tr>
@@ -94,29 +106,29 @@ info@mytonautomotive.com</td>
 	<table id="order_table">
 		<thead>
 			<tr>
-				<th>Order No</th>
-				<th>Description</th>
-				<th>Qty</th>
-				<th>Weight (kg)</th>
-				<th>Surcharge ex VAT</th>
-				<th>Price ex VAT</th>
-				<th>Total ex VAT</th>
-				<th>VAT</th>
-				<th>Total inc VAT</th>
+				<th width="15%">Part No</th>
+				<th width="30%">Description</th>
+				<th width="5%">Qty</th>
+				<th width="5%">Weight (kg)</th>
+				<th width="10%">Surcharge ex VAT</th>
+				<th width="10%">Price ex VAT</th>
+				<th width="10%">Total ex VAT</th>
+				<th width="5%">VAT</th>
+				<th width="10%">Total inc VAT</th>
 			</tr>
 		</thead>
 		<tbody>			
 			{% for detail_order in order.detail_order_data %}			
 			<tr>
 				<td>{{ detail_order.product.part_number }}</td>
-				<td>{{ detail_order.product.name }}</td>
+				<td style="color:blue">{{ detail_order.product.name }}</td>
 				<td>{{ detail_order.qty }}</td>
 				<td>{{ detail_order.weight }}</td>
 				<td class="align_right">{{ detail_order.surcharge|currency }}</td>
 				<td class="align_right">{{ detail_order.price|currency }}</td>
-				<td class="align_right">{{ detail_order.amount|currency }}</td>
-				<td></td>
-				<td class="align_right">{{ detail_order.amount|currency }}</td>
+				<td class="align_right"><b>{{ detail_order.amount|currency }}</b></td>
+				<td>{{ vat }}%</td>
+				<td class="align_right"><b>{% price_inc_tax detail_order.amount vat %}</b></td>
 			</tr>
 			{% endfor %}
 		</tbody>
@@ -130,7 +142,7 @@ info@mytonautomotive.com</td>
 				<td class="align_right">{{order.amount|subtract:order.order_delivery.cost|subtract:order.vat|currency}}</td>
 			</tr>
 			<tr>
-				<td colspan="8" class="align_right">Delivery Service</td>
+				<td colspan="8" class="align_right">Shipping & Processing ex VAT ({{order.order_delivery.service}})</td>
 				<td class="align_right">{{order.order_delivery.cost}}</td>
 			</tr>
 			<tr>
@@ -145,6 +157,8 @@ info@mytonautomotive.com</td>
 	</table>
 	<h4>Order Notes</h4>
 	<div>{{order.order_notes}}</div>
+	<h4>Status</h4>
+	<div>{{order.get_status_display}}</div>
 </div>
 
 </div> <!-- end body -->

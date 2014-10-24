@@ -50,6 +50,8 @@ urlpatterns = patterns('',
                            {'next_page': '?next=/'}, name='auth_logout'),
                        url(r'^accounts/register/$',
                            'apps.customer.views.register_user'),
+                       url(r'^accounts/change_password/$',
+                           'apps.customer.views.change_password'),
                        url(r'^accounts/register_success/$',
                            'apps.customer.views.register_success'),
 

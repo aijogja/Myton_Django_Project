@@ -20,7 +20,7 @@
 <body class ="body">
 
 <div class="image_header clearfix">
-    <div class="col-md-6"><img src="{{ STATIC_URL }}img/mainlogo.jpg" width="180" height="73"></div>    
+    <div class="col-md-6"><a href="/"><img src="{{ STATIC_URL }}img/mainlogo.jpg" width="180" height="73"></a></div>    
     <div class="row">
     <div class="well well-lg col-md-3 pull-right account-cart-box">
       <a href="/my-cart" class="account-cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart {% if cart.count %}<span class="badge">{{cart.count}}</span>{% endif %}</a>
@@ -29,6 +29,7 @@
     </div>
     <div class="row">
     <div class="pull-right">
+      <a href="/accounts/change_password" class="btn btn-link" style="margin-right:0px">Change Password</a> | 
       <a href="/accounts/logout" class="btn btn-link" style="margin-right:0px">Logout</a>
     </div>    
     </div>    
@@ -83,6 +84,8 @@
 <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){  
+  $(".theform input").addClass('form-control');
+
   $('#country_delivery').change(function(){ 
     $('#delivery_service').html('loading');
     $('#order_detail').html('<div class="form-group pull-right"><div class="col-sm-12"><span class="btn btn-success" disabled="disabled">Continue</span></div>');

@@ -59,5 +59,10 @@
 </table>
 <div class="form-group pull-right">          
 	<div class="col-sm-12">
-	<input type="submit" class="btn btn-success" value="Continue">
+    {% if cart.count > 0 %}
+	<input type="submit" class="btn btn-success" value="Place Order">    
+    {% else %}
+    <span class="btn btn-success" disabled="disabled">Place Order</span>
+    {% endif %}
+    </div>
 </div>

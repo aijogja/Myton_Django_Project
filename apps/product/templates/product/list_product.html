@@ -24,15 +24,16 @@
     <p>Results:</p>
 
 <table class="table">
-    <tr><th>Part Number</th><th>Description</th><th>Retail Price</th><th>Your Price</th><th>Supersesions</th><th>Surcharge</th><th></th></tr>
+    <tr><th>Part Number</th><th>Description</th><th>Discount Code</th><th>Retail Price</th><th>Your Price</th><th>Supersessions</th><th>Surcharge</th><th></th></tr>
 
     {% if part %}
     {% for part_number in part %}
     <tr>
         <td>{{ part_number.part_number }}</td>
         <td>{{ part_number.name }}</td>
+        <td>{{ part_number.discount_code }}</td>
         <td>{{ part_number.retail_price }}</td>
-        <td>{% your_price request part_number.pk %}</td>
+        <td><b>{% your_price request part_number.pk %}</b></td>
         <td>{{ part_number.supersessions }}</td>
         <td>{{ part_number.surcharge }}</td>
         <td><a href="" onclick="addtocart('/addcart/{{part_number.id}}'); return false;" class="btn btn-success btn-sm">Order</a></td>
