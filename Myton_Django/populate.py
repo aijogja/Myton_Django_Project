@@ -18,6 +18,7 @@ def populate_product_by_files(file, supplier=None):
             retail_price = part_info_array[2]
             quantity_issued_in = part_info_array[3]
             discount_code = part_info_array[4]
+            supersessions = part_info_array[5]
             surcharge = part_info_array[6]
 
             if int(quantity_issued_in) > 1:
@@ -43,6 +44,7 @@ def populate_product_by_files(file, supplier=None):
             part.retail_price = retail_price
             part.buy_price = buy_price
             part.surcharge = surcharge
+            part.supersessions = supersessions
             part.discount_code = discount
             part.deleted = False
             if supplier :

@@ -25,11 +25,11 @@
             <td>{{ detail_order.product.name }}</td>
             <td class="text-center col-sm-1">{{ detail_order.qty }}</td>            
             <td>{{ detail_order.weight }}</td>
-            <td>{{ detail_order.surcharge|currency }}</td>
-            <td>{{ detail_order.price|currency }}</td>
-            <td>{{ detail_order.amount|currency }}</td>
+            <td>&pound; {{ detail_order.surcharge|currency }}</td>
+            <td>&pound; {{ detail_order.price|currency }}</td>
+            <td>&pound; {{ detail_order.amount|currency }}</td>
             <td>{{ vat }}%</td>
-            <td class="text-right">{% price_inc_tax detail_order.amount vat %}</td>
+            <td class="text-right">&pound; {% price_inc_tax detail_order.amount vat %}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -40,19 +40,19 @@
             </tr>
             <tr>
                 <td colspan="8" class="text-right">Total ex VAT</td>
-                <td class="text-right">{{myorder.amount|subtract:myorder.order_delivery.cost|subtract:myorder.vat|currency}}</td>
+                <td class="text-right">&pound; {{myorder.amount|subtract:myorder.order_delivery.cost|subtract:myorder.vat|currency}}</td>
             </tr>
             <tr>
                 <td colspan="8" class="text-right">Total VAT</td>
-                <td class="text-right">{% vat_value myorder.amount|subtract:myorder.order_delivery.cost|subtract:myorder.vat vat %}</td>
+                <td class="text-right">&pound; {% vat_value myorder.amount|subtract:myorder.order_delivery.cost|subtract:myorder.vat vat %}</td>
             </tr>
             <tr>
                 <td colspan="8" class="text-right">Delivery Service</td>
-                <td class="text-right">{{myorder.order_delivery.cost|currency}}</td>
+                <td class="text-right">&pound; {{myorder.order_delivery.cost|currency}}</td>
             </tr>
             <tr>
                 <td colspan="8" class="text-right">Total Payment</td>
-                <td class="text-right">{{myorder.amount|currency}}</td>
+                <td class="text-right">&pound; {{myorder.amount|currency}}</td>
             </tr>
         </tfoot>
 </table>

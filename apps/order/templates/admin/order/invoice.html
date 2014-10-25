@@ -124,11 +124,11 @@
 				<td style="color:blue">{{ detail_order.product.name }}</td>
 				<td>{{ detail_order.qty }}</td>
 				<td>{{ detail_order.weight }}</td>
-				<td class="align_right">{{ detail_order.surcharge|currency }}</td>
-				<td class="align_right">{{ detail_order.price|currency }}</td>
-				<td class="align_right"><b>{{ detail_order.amount|currency }}</b></td>
+				<td class="align_right">&pound; {{ detail_order.surcharge|currency }}</td>
+				<td class="align_right">&pound; {{ detail_order.price|currency }}</td>
+				<td class="align_right"><b>&pound; {{ detail_order.amount|currency }}</b></td>
 				<td>{{ vat }}%</td>
-				<td class="align_right"><b>{% price_inc_tax detail_order.amount vat %}</b></td>
+				<td class="align_right"><b>&pound; {% price_inc_tax detail_order.amount vat %}</b></td>
 			</tr>
 			{% endfor %}
 		</tbody>
@@ -139,19 +139,19 @@
 			</tr>
 			<tr>
 				<td colspan="8" class="align_right">Total ex VAT</td>
-				<td class="align_right">{{order.amount|subtract:order.order_delivery.cost|subtract:order.vat|currency}}</td>
+				<td class="align_right">&pound; {{order.amount|subtract:order.order_delivery.cost|subtract:order.vat|currency}}</td>
 			</tr>
 			<tr>
 				<td colspan="8" class="align_right">Shipping & Processing ex VAT ({{order.order_delivery.service}})</td>
-				<td class="align_right">{{order.order_delivery.cost}}</td>
+				<td class="align_right">&pound; {{order.order_delivery.cost}}</td>
 			</tr>
 			<tr>
 				<td colspan="8" class="align_right">Total VAT</td>
-				<td class="align_right">{% vat_value order.amount|subtract:order.order_delivery.cost|subtract:order.vat vat %}</td>
+				<td class="align_right">&pound; {% vat_value order.amount|subtract:order.order_delivery.cost|subtract:order.vat vat %}</td>
 			</tr>
 			<tr>
 				<td colspan="8" class="align_right">Total</td>
-				<td class="align_right">{{order.amount|currency}}</td>
+				<td class="align_right">&pound; {{order.amount|currency}}</td>
 			</tr>
 		</tfoot>
 	</table>

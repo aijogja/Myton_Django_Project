@@ -9,9 +9,13 @@ class DiscountCodeAdmin(admin.ModelAdmin):
     ordering = ['code']
 
 class PartAdmin(admin.ModelAdmin):
+    actions = None
     list_display = ['part_number', 'name', 'discount_code', 'weight', 'retail_price', 'buy_price', 'surcharge', 'supplier', 'deleted', 'last_modified']
     list_filter = ['discount_code', 'supplier', 'deleted']
     search_fields = ['part_number']
+
+    def has_delete_permission(self, request, obj=False):
+        return False
 
 class SupplierAdmin(admin.ModelAdmin):
     list_display = ['name', 'contact', 'email', 'country', 'active', 'last_modified']

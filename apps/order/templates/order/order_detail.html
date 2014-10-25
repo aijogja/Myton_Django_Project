@@ -19,11 +19,11 @@
             <td>{{ item.product.name }}</td>
             <td class="text-center col-sm-1">{{ item.quantity }}</td>            
             <td>{{ item.product.weight }}</td>
-            <td>{{ item.surcharge|currency }}</td>
-            <td>{{ item.unit_price|currency }}</td>
-            <td>{{ item.total_price|currency }}</td>
+            <td>&pound; {{ item.surcharge|currency }}</td>
+            <td>&pound; {{ item.unit_price|currency }}</td>
+            <td>&pound; {{ item.total_price|currency }}</td>
             <td>{{ vat }}%</td>
-            <td>{% price_inc_tax item.total_price vat %}</td>
+            <td>&pound; {% price_inc_tax item.total_price vat %}</td>
         </tr>
         {% endfor %}
         <tr>
@@ -34,25 +34,25 @@
         <tr>
             <td colspan="6"></td>
             <td colspan="2" class="text-right">Total ex VAT</td>
-            <td class="warning">{{cart.summary|currency}}</td>
+            <td class="warning">&pound; {{cart.summary|currency}}</td>
         </tr>
         <tr>
             <td colspan="6"></td>
             <td colspan="2" class="text-right">Total VAT</td>
             <td class="warning">
-                {% vat_value cart.summary vat %}
+                &pound; {% vat_value cart.summary vat %}
                 <input type="hidden" name="tot_vat" value="{% vat_value_float cart.summary vat %}">
             </td>
         </tr>
         <tr>
             <td colspan="6"></td>
             <td colspan="2" class="text-right">Delivery Service</td>
-            <td class="warning">{{service.cost|currency}}</td>
+            <td class="warning">&pound; {{service.cost|currency}}</td>
         </tr>
         <tr>
             <td colspan="6"></td>
             <td colspan="2" class="text-right">Total Payment</td>
-            <td class="danger">{% total_payment cart.summary vat service.cost %}</td>
+            <td class="danger">&pound; {% total_payment cart.summary vat service.cost %}</td>
         </tr>
     {% endif %}
 
