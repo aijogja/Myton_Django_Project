@@ -20,4 +20,10 @@ class Command(BaseCommand):
 			print '%s (%s)' % (e.message, type(e))
 			pass
 
+		try:
+			checkpart = Part.objects.filter(discount_code=None).update(deleted=True)
+		except:
+			print '%s (%s)' % (e.message, type(e))
+			pass
+
 		
