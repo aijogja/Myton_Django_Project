@@ -18,6 +18,7 @@ from apps.customer.forms import DeliveryAddress
 from apps.setup.forms import DeliveryServiceForm
 from apps.setup.models import PostageRate, PostageCountry
 from apps.order.models import Order, OrderDetail, OrderDelivery, OrderComment
+from apps.log.models import Search
 from cart import Cart
 
 def custom_proc(request):
@@ -78,79 +79,6 @@ def update_cart(request, product_id, qty):
     else:
         return HttpResponseRedirect('/')
 
-# def checkout(request):
-#     profile = Profile.objects.get(user__username=request.user)
-#     form = DeliveryAddress(request.POST or None, instance=profile)
-#     delivery_form = DeliveryServiceForm(request.POST or None)
-
-#     if form.is_valid() and delivery_form.is_valid():
-#         #import pdb; pdb.set_trace()
-
-#         pass
-        
-
-#     try:        
-#         check_band = PostageCountry.objects.get(country=profile.country)
-#         band = check_band.band
-#     except:
-#         band = '1'
-#     delivery_form.fields['service'] = forms.ModelChoiceField(required=True, queryset=PostageRate.objects.all().filter(band=band), widget=forms.Select(attrs={'class': 'form-control'}))
-
-#     data = {'form':form,'delivery_form':delivery_form}
-#     return render_to_response('checkout.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
-
-
-    
-
-# def login(request):
-#     c = {}
-#     c.update(csrf(request))
-#     return render_to_response('safe_login.html', c)
-
-
-# def auth_view(request):
-#     username = request.POST.get('username', '')
-#     password = request.POST.get('password', '')
-#     user = auth.authenticate(username=username, password=password)
-
-#     if user is not None:
-#         auth.login(request, user)
-#         return HttpResponseRedirect('/accounts/loggedin')
-#     else:
-#         return HttpResponseRedirect('/accounts/invalid')
-
-
-# def loggedin(request):
-#     return render_to_response('loggedin.html',
-#                               {'full_name': request.user.username})
-
-
-# def invalid_login(request):
-    # return render_to_response('invalid_login.html')
-
-
-# def logout(request):
-#     auth.logout(request)
-#     return render_to_response('logout.html')
-
-# def register_user(request):
-#     if request.method == 'POST':
-#         form = MyRegistrationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect('/accounts/register_success')
-#     args ={}
-#     args.update(csrf(request))
-
-#     args['form'] = MyRegistrationForm()
-
-# return render_to_response('register.html', args,
-# context_instance=RequestContext(request))
-
-# def register_success(request):
-#     return render_to_response('register_success.html')
-
-
 # some experiments
 
 def ua_display_good1(request):
@@ -158,17 +86,6 @@ def ua_display_good1(request):
     var = 001
 
     return HttpResponse(render_to_string('experiments.html', {'id_number': var}))
-
-# def search(request):
-#    if 'q' in request.GET:
-#        message = request.GET['q']
-#    else:
-#        message = 'You submitted an empty form.'
-#
-#
-#    data_received = message
-# return HttpResponse(render_to_string('partsearch.html', {'id_number':
-# data_received}))
 
 @login_required
 def search(request):
@@ -180,12 +97,12 @@ def search(request):
         # perform some operations on the search entered - ie. remove spaces -
         # change all letters to upper case
         q.upper()
-        # print q
         q = q.replace(" ", "")
-        # print q
 
         # run a query on the database
         part_object = Part.objects.filter(part_number__icontains=q,deleted=False)
+        log_search = Search(user=request.user,keyword=q)
+        log_search.save()
         data['search_query'] = q
         data['part'] = part_object
 
