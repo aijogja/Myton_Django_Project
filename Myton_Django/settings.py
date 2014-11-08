@@ -66,6 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
+    'Myton_Django.middleware.SessionLogMiddleware',
 )
 
 ROOT_URLCONF = 'Myton_Django.urls'
