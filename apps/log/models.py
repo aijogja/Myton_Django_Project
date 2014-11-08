@@ -19,7 +19,7 @@ class Session(models.Model):
     session_key = models.CharField(max_length=255, null=True, blank=True, editable=False)
     user = models.ForeignKey(User, related_name="user_visit", editable=False)
     ipaddress = models.CharField(max_length=40, null=True, blank=True, editable=False)
-    time_on_site = models.IntegerField(null=True)
+    time_on_site = models.IntegerField(null=True, editable=False)
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
