@@ -24,7 +24,7 @@
     <p>Results:</p>
 
 <table class="table">
-    <tr><th>Part Number</th><th>Description</th><th>Discount Code</th><th>Retail Price</th><th>Your Price</th><th>Supersessions</th><th>Surcharge</th><th></th></tr>
+    <tr><th>Part Number</th><th>Description</th><th>Discount Code</th><th>Retail Price</th><th>Your Price</th><th class="text-center">Quantiry Issued In</th><th>Supersessions</th><th>Surcharge</th><th></th></tr>
 
     {% if part %}
     {% for part_number in part %}
@@ -34,6 +34,7 @@
         <td>{{ part_number.discount_code }}</td>
         <td>&pound; {{ part_number.retail_price }}</td>
         <td><b>&pound; {% your_price request part_number.pk %}</b></td>
+        <td class="text-center">{{ part_number.quantity_issued_in }}</td>
         <td>{{ part_number.supersessions }}</td>
         <td>&pound; {{ part_number.surcharge }}</td>
         <td><a href="" onclick="addtocart('/addcart/{{part_number.id}}'); return false;" class="btn btn-success btn-sm">Order</a></td>

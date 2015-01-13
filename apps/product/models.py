@@ -101,6 +101,7 @@ class Part(models.Model):
     width = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
     length = models.DecimalField(max_digits=18, decimal_places=2, default=1, null=True)
     retail_price = models.DecimalField(max_digits=18, decimal_places=2, default=0, null=True)
+    quantity_issued_in = models.IntegerField(null=True, default=1)
     buy_price = models.DecimalField(max_digits=18, decimal_places=2, default=0, null=True)
     surcharge = models.DecimalField(max_digits=18, decimal_places=2, default=0, null=True)
     deleted = models.BooleanField(default=False)

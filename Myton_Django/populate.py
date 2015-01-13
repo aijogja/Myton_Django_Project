@@ -42,6 +42,7 @@ def populate_product_by_files(file, supplier=None):
             part, created = Part.objects.get_or_create(part_number=part_number)
             part.name = part_name
             part.retail_price = retail_price
+            part.quantity_issued_in = quantity_issued_in
             part.buy_price = buy_price
             part.surcharge = surcharge
             part.supersessions = supersessions
