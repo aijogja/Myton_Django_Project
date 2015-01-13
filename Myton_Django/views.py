@@ -16,7 +16,7 @@ from apps.product.models import Part
 from apps.customer.models import Profile
 from apps.customer.forms import DeliveryAddress
 from apps.setup.forms import DeliveryServiceForm
-from apps.setup.models import PostageRate, PostageCountry
+from apps.setup.models import PostageRate, PostageCountry, Setting
 from apps.order.models import Order, OrderDetail, OrderDelivery, OrderComment
 from apps.log.models import Search
 from cart import Cart
@@ -103,8 +103,13 @@ def search(request):
         part_object = Part.objects.filter(part_number__icontains=q,deleted=False)
         log_search = Search(user=request.user,keyword=q)
         log_search.save()
+        setting = {}
+        settings = Setting.objects.all()
+        for sett in settings:
+            setting[sett.slug] = sett.value
         data['search_query'] = q
         data['part'] = part_object
+        data['setting'] = setting
 
     return render_to_response('product/list_product.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
