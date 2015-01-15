@@ -89,7 +89,12 @@ def ua_display_good1(request):
 
 @login_required
 def search(request):
-    data = {'breadcrumb': 'search'}
+    tooltip = {}
+    tooltips = Tooltip.objects.all()
+    for ttips in tooltips:
+        tooltip[ttips.slug] = ttips.value
+    
+    data = {'breadcrumb': 'search', 'tooltip': tooltip}
 
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
@@ -103,13 +108,8 @@ def search(request):
         part_object = Part.objects.filter(part_number__icontains=q,deleted=False)
         log_search = Search(user=request.user,keyword=q)
         log_search.save()
-        tooltip = {}
-        tooltips = Tooltip.objects.all()
-        for ttips in tooltips:
-            tooltip[ttips.slug] = ttips.value
         data['search_query'] = q
         data['part'] = part_object
-        data['tooltip'] = tooltip
 
     return render_to_response('product/list_product.html', data, context_instance=RequestContext(request, processors=[custom_proc]))
 
