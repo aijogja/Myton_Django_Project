@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.setup.models import PostageCountry, PostageRate, Setting
+from apps.setup.models import PostageCountry, PostageRate, Setting, Tooltip
 
 class PostageCountryAdmin(admin.ModelAdmin):
     list_display = ['country', 'band', 'vat', 'active']
@@ -25,7 +25,24 @@ class SettingAdmin(admin.ModelAdmin):
         else:
             return []
 
+class TooltipAdmin(admin.ModelAdmin):
+    actions = None
+    list_display = ['title', 'value']
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def get_readonly_fields(self, request, obj):
+        if obj:
+            return ['title']
+        else:
+            return []
+
 # Register your models here.
 admin.site.register(PostageCountry, PostageCountryAdmin)
 admin.site.register(PostageRate, PostageRateAdmin)
 admin.site.register(Setting, SettingAdmin)
+admin.site.register(Tooltip, TooltipAdmin)

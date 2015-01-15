@@ -51,3 +51,16 @@ class Setting(models.Model):
 
     def __unicode__(self):
         return '%s' % (self.title)
+
+class Tooltip(models.Model):    
+    title = models.CharField(max_length=225, null=True)    
+    slug = models.CharField(max_length=200, null=True, editable=False)
+    value = models.TextField(blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Tooltip"
+
+    def __unicode__(self):
+        return '%s' % (self.title)
